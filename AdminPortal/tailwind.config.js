@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: { 
+      colors: {
+      saffron: ' #f93',
+      yellow: '#ef6b13'  // Saffron color code
+    },
+  },
   },
   plugins: [],
 }
