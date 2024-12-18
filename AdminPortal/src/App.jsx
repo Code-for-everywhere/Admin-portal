@@ -1,4 +1,5 @@
-import Dashboard from "./Dashboard/Dashboard";
+import Dashboard from "./Dashboard/Dashboard"
+
 
 export default function App(){
   return(
