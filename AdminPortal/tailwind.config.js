@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: { 
       colors: {
-      saffron: ' #f93',
+      saffron: ' #EE922B',
       yellow: '#ef6b13'  // Saffron color code
     },
   },
