@@ -1,7 +1,7 @@
 export default function Content (){
     return (
         <>
-        <div className=" items-center justify-between ml-96">
+        <div className=" items-center justify-between">
             <div>div 1</div>
             <div>div 2</div>
             <div>div 3</div>

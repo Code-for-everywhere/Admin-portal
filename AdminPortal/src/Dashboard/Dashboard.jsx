@@ -27,7 +27,8 @@ export default function Dashboard() {
   }, []);
 
   return toggle ? (
-    <div className="flex">
+    
+      <header className="flex">
       <div className={`h-screen  ${minWidth <= 432 ? "min-w-full" : "w-1/6"}`}>
         <Sidebar
           isOpen={toggle}
@@ -36,7 +37,7 @@ export default function Dashboard() {
         />
       </div>
 
-      <header className="w-full">
+      <div className="w-full">
         <div className="flex items-center justify-between bg-gray-200 pl-3 py-4  border-gray-400">
           {/* Left Icon & Title */}
           <div className="flex items-center">
@@ -68,8 +69,9 @@ export default function Dashboard() {
         {/* <div className="border-b border-gray-400 px-10 py-4">
         <h1 className="ml-2 text-lg">Home</h1>
       </div> */}
-      </header>
-    </div>
+      </div>
+    </header>
+
   ) : (
     <header>
       <div className="flex items-center justify-between px-10 py-4 bg-gray-200">

@@ -1,11 +1,11 @@
-import { faXmark,faChartLine } from "@fortawesome/free-solid-svg-icons";
+import { faXmark,faChartLine  } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 // eslint-disable-next-line react/prop-types
 const Sidebar = ({ isOpen, minWidth, handleToggle }) => {
   return minWidth >= 432 ? (
     <div
-      className={`fixed inset-y-0 left-0  ${
+      className={` sticky inset-y-0 left-0  ${
         minWidth <= 432 ? "-translate-x-full relative w-full" : ""
       }  bg-saffron rounded-r h-full text-white  shadow-md transform transition-transform duration-400 ease-in-out ${
         isOpen ? "translate-x-0" : "-translate-x-full"
@@ -49,7 +49,7 @@ const Sidebar = ({ isOpen, minWidth, handleToggle }) => {
           />
           <div className=" cursor-pointer mr-4" onClick={handleToggle}>
           <FontAwesomeIcon
-            className="h-12 w-4 font-bold text-black absolute top-1 right-3 "
+            className="h-12 w-4 font-bold text-black absolute top-1 right-3 overflow-visible"
             icon={faXmark}
           />
         </div>
