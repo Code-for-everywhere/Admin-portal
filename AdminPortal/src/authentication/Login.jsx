@@ -1,5 +1,6 @@
 import  { useState, useEffect } from "react";
-import '@fortawesome/fontawesome-free/css/all.min.css'; // Import Font Awesome styles for styling
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock, faSignInAlt, faUser } from "@fortawesome/free-solid-svg-icons"; // Import Font Awesome styles for styling
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -54,8 +55,11 @@ function Login() {
   return (
     <div className="flex min-h-screen flex-col sm:flex-row">
       {/* Left Section (Text Typing Effect) */}
-      <div className="flex-1 bg-saffron justify-center items-center flex relative p-6">
+      <div className="flex-1 bg-saffron justify-center items-center flex relative  p-6" style={{ backgroundImage: "url('https://cdn.pixabay.com/photo/2024/01/24/11/22/ai-8529399_1280.jpg')" }}>
+        
+        
         {/* Logo taskcraft */}
+
         <div className="absolute bg-white left-1/2 transform -translate-x-1/2 top-5 sm:top-10 p-4">
           <img src="backgroundimage/TaskCraft_logo.jpg" alt="Logo" className="w-80 h-auto" />
         </div>
@@ -83,7 +87,7 @@ function Login() {
               <div className="w-full max-w-md mt-32 sm:mt-10 md:mt-20">  {/* Adjusts the distance from the top */}
                  <div className="flex justify-center items-center">
                      <div className="w-10 h-10 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-40 lg:h-40 bg-white rounded-full flex justify-center items-center border-4 border-solid border-saffron">
-                        <i className="fas fa-user text-saffron text-xl sm:text-2xl md:text-3xl lg:text-4xl"></i> {/* Font Awesome user icon */}
+                        <FontAwesomeIcon icon={faUser} className=" text-saffron text-xl sm:text-2xl md:text-3xl lg:text-4xl"/> {/* Font Awesome user icon */}
                      </div>
                  </div>
 
@@ -94,7 +98,7 @@ function Login() {
                     <div className="relative">
                       <label htmlFor="email" className="block text-lg sm:text-xl md:text-2xl text-gray-700">Username:</label>
                       <div className="relative">
-                        <i className="fas fa-user text-saffron text-2xl absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+                      <FontAwesomeIcon icon={faUser} className="text-saffron text-2xl absolute left-3 top-1/2 transform -translate-y-1/2" />
                         <input
                           id="email"
                           value={email}
@@ -111,7 +115,7 @@ function Login() {
                     <div className="relative">
                       <label htmlFor="password" className="block text-lg sm:text-xl md:text-2xl text-gray-700">Password:</label>
                       <div className="relative">
-                        <i className="fas fa-lock text-saffron text-2xl absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+                        <FontAwesomeIcon icon={faLock} className="text-saffron text-2xl absolute left-3 top-1/2 transform -translate-y-1/2" />
                         <input
                           type={showPassword ? "text" : "password"}
                           id="password"
@@ -135,7 +139,7 @@ function Login() {
                       type="submit"
                       className="w-full py-3 text-white bg-saffron hover:bg-yellow hover:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-saffron"
                     >
-                      <i className="fas fa-sign-in-alt text-white text-3xl"></i>
+                      <FontAwesomeIcon icon={faSignInAlt} className="fas fa-sign-in-alt text-white text-3xl"/>
                     </button>
                   </form>
 

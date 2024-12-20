@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import './Error.css'; // Import the custom CSS for animations
 
 function Error() {

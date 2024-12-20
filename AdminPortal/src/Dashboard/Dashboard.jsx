@@ -27,6 +27,17 @@ export default function Dashboard() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  if(minWidth <= 432 && toggle) {
+    return <div
+    className="min-h-screen min-w-screen "
+  >
+    <Sidebar
+      isOpen={toggle}
+      minWidth={minWidth}
+      handleToggle={handleToggle}
+    />
+  </div>
+  }
   return (
     <>
       <header className="top-0 w-full">
@@ -34,7 +45,7 @@ export default function Dashboard() {
           {/* Sidebar */}
           {toggle && (
             <div
-              className={`h-screen ${minWidth <= 432 ? "min-w-full" : "w-1/6"}`}
+              className="h-full  w-1/6"
             >
               <Sidebar
                 isOpen={toggle}

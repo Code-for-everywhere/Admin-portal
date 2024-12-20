@@ -18,21 +18,28 @@ const Sidebar = ({ isOpen, minWidth, handleToggle }) => {
           alt="Logo"
         />
       </div>
-      <ul>
+      <ul className="h-screen">
         <li className="hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
           <NavLink to="/content">
             Dashboard
           </NavLink>
         </li>
         <li className="hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
-          Profile
+          <NavLink to="/login">
+            Login
+          </NavLink>
+        </li>
+        <li className="hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
+          <NavLink to="/error">
+            Error
+          </NavLink>
         </li>
       </ul>
     </div>
   ) : (
     <div
-      className={`fixed inset-y-0 left-0 ${
-        minWidth <= 432 ? "-translate-x-full relative w-full" : ""
+      className={`fixed inset-y-0 left-0 h-screen ${
+        minWidth <= 432 ? "-translate-x-full relative w-screen" : ""
       } bg-saffron rounded-r h-full text-white shadow-md transform transition-transform duration-400 ease-in-out ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
@@ -52,17 +59,21 @@ const Sidebar = ({ isOpen, minWidth, handleToggle }) => {
           </div>
         </div>
       </div>
-      <ul className="mt-1">
-        <li className="flex items-center justify-center cursor-pointer text-2xl shadow text-white p-2 font-bold">
-          <NavLink to="/dashboard/content">
+      <ul className="mt-1 h-screen">
+        <li className="flex items-center justify-center cursor-pointer hover:rounded hover:bg-orange-200 hover:text-black text-xl shadow text-white p-3 font-bold">
+          <NavLink to="/content">
              Dashboard
           </NavLink>
         </li>
-        <li className="flex items-center justify-center cursor-pointer text-2xl shadow text-white p-2 font-bold">
-          Services
+        <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold ">
+          <NavLink to="/login">
+            Login
+          </NavLink>
         </li>
-        <li className="flex items-center justify-center cursor-pointer text-2xl shadow text-white p-2 font-bold">
-          Get in Touch
+        <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
+          <NavLink to="/error">
+            Error
+          </NavLink>
         </li>
       </ul>
     </div>
