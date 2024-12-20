@@ -15,24 +15,32 @@ function Error() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="relative bg-saffron rounded-lg max-w-5xl w-full h-full max-h-5xl p-6">
-        <div className="flex items-center justify-center space-x-60">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="relative text-center p-6 bg-white rounded-lg  max-w-4xl w-full">
+        {/* Error Image */}
+        <div className="absolute left-1/2 transform -translate-x-1/2 top-5 sm:top-10">
+          <img src="backgroundimage/404error.webp" alt="Error" className="w-48 h-auto mx-auto" />
+        </div>
+
+        <div className="pt-24">
           {/* 404 Numbers */}
-          <div className="flex space-x-6 text-7xl font-bold text-red-600">
-            <p className="animate text-4xl">4</p>
-            <p className="animate text-4xl">0</p>
-            <p className="animate text-4xl">4</p>
+          <div className="animate flex justify-center space-x-6 text-7xl font-bold text-black">
+            <p>4</p>
+            <p>0</p>
+            <p>4</p>
           </div>
 
           {/* Oops Text */}
-          <p className="animate text-xl text-gray-700 mt-4 mx-6">Oops! Page not found.</p>
+          <p className="animate mt-4 text-xl text-black font-medium">
+            <span className="block text-4xl text-red-500 mb-2">Oops!</span>
+            Page not found.
+          </p>
 
           {/* Refresh Button */}
-          <div>
+          <div className="mt-6">
             <button
               onClick={handleSubmit}
-              className="px-4 py-2 bg-yellow text-white font-semibold rounded-lg shadow-md hover:bg-white hover:text-saffron focus:outline-none focus:ring-2 focus:ring-saffron focus:ring-opacity-50"
+              className="animate px-6 py-3 bg-gray-500 text-white font-semibold rounded-lg shadow-md hover:bg-black hover:text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 transition-all"
             >
               Refresh
             </button>

@@ -43,13 +43,13 @@
   }
   
   .animate-in-1 {
-    animation-name: slideFromLeft;
+    animation-name: fallDown;
     animation-delay: 1s;
     opacity: 1;
   }
   
   .animate-in-2 {
-    animation-name: fallDown;
+    animation-name: slideFromBottom;
     animation-delay: 1s;
     opacity: 1;
   }
