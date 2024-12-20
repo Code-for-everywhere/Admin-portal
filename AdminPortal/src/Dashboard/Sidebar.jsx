@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
-import {  faXmark } from "@fortawesome/free-solid-svg-icons";
+import {  faXmark,faRightToBracket,faTriangleExclamation,faBars } from "@fortawesome/free-solid-svg-icons";
 
 // eslint-disable-next-line react/prop-types
 const Sidebar = ({ isOpen, minWidth, handleToggle }) => {
@@ -21,17 +21,17 @@ const Sidebar = ({ isOpen, minWidth, handleToggle }) => {
       <ul className="h-screen">
         <li className="hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
           <NavLink to="/content">
-            Dashboard
+           <FontAwesomeIcon icon={faBars} className="text-sky-800" /> Dashboard
           </NavLink>
         </li>
         <li className="hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
           <NavLink to="/login">
-            Login
+          <FontAwesomeIcon icon={faRightToBracket} className="text-green-600" />Login
           </NavLink>
         </li>
         <li className="hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
           <NavLink to="/error">
-            Error
+          <FontAwesomeIcon icon={faTriangleExclamation} className="text-red-700"/>  Error
           </NavLink>
         </li>
       </ul>
@@ -62,17 +62,17 @@ const Sidebar = ({ isOpen, minWidth, handleToggle }) => {
       <ul className="mt-1 h-screen">
         <li className="flex items-center justify-center cursor-pointer hover:rounded hover:bg-orange-200 hover:text-black text-xl shadow text-white p-3 font-bold">
           <NavLink to="/content">
-             Dashboard
+          <FontAwesomeIcon icon={faBars} className="text-sky-800" />  Dashboard
           </NavLink>
         </li>
         <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold ">
           <NavLink to="/login">
-            Login
+          <FontAwesomeIcon icon={faRightToBracket} className="text-green-600" />   Login
           </NavLink>
         </li>
         <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
           <NavLink to="/error">
-            Error
+          <FontAwesomeIcon icon={faTriangleExclamation} className="text-red-700" />  Error
           </NavLink>
         </li>
       </ul>

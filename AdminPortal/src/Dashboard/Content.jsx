@@ -4,11 +4,9 @@ import DashboardTable from "../component/DashboardTable";
 export default function Content() {
   return (
     <div className="p-4">
-        <DashboardCard/>
-        <DashboardTable />
-        <DashboardTable />
-        <DashboardTable />
-      
+      <DashboardCard />
+
+      <DashboardTable />
     </div>
   );
 }
