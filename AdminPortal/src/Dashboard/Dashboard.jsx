@@ -87,7 +87,7 @@ export default function Dashboard() {
             </div>
 
             {/* Outlet to render Content component */}
-            <div className="p-4 bg-gray-100 flex-1">
+            <div className="p-4 bg-gray-100 ">
               <Outlet /> {/* Content component will be displayed here */}
             </div>
           </div>
