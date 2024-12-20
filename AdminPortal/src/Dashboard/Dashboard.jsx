@@ -49,7 +49,7 @@ export default function Dashboard() {
           {/* Sidebar */}
           {toggle && (
             <div
-              className="h-full  w-1/6"
+              className="h-full  w-1/5"
             >
               <Sidebar
                 isOpen={toggle}
