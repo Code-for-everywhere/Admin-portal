@@ -1,0 +1,68 @@
+/* Custom Animation */
+@keyframes fallDown {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideFromLeft {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideFromBottom {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+    
+  }
+  @keyframes slideFromRight {
+    0%{
+      transform : translateX(100%);
+    }
+    100%{
+        transform: translatex(0)
+    }
+  }
+  
+  /* Adding animation delay and specifying animation styles for each element */
+  .animate {
+    opacity: 1;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+  }
+  
+  .animate-in-1 {
+    animation-name: fallDown;
+    animation-delay: 1s;
+    opacity: 1;
+  }
+  
+  .animate-in-2 {
+    animation-name: slideFromBottom;
+    animation-delay: 1s;
+    opacity: 1;
+  }
+  
+  .animate-in-3 {
+    animation-name: slideFromRight;
+    animation-delay: 1s;
+    opacity: 1;
+  }
+  
+  .animate-in-4 {
+    animation-name: slideFromBottom;
+    animation-delay: 1s;
+    opacity: 0.8;
+  }
+  

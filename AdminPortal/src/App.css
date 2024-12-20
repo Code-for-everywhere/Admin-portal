@@ -1,6 +1,0 @@
-/* Smooth shrinking effect on header when sidebar is open */
-.shrink-header {
-    transform: scale(0.9); /* Shrinks the header */
-    transition: transform 0.3s ease-in-out; /* Smooth animation */
-  }
-  
