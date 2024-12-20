@@ -27,6 +27,16 @@ const Sidebar = ({ isOpen, minWidth, handleToggle }) => {
         <li className="hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
           Profile
         </li>
+        <li className="hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
+          <NavLink to="/login">
+            Login
+          </NavLink>
+        </li>
+        <li className="hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
+          <NavLink to="/error">
+            Error
+          </NavLink>
+        </li>
       </ul>
     </div>
   ) : (
