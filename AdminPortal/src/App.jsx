@@ -4,6 +4,8 @@ import Dashboard from "./Dashboard/Dashboard"
 import Content from "./Dashboard/Content"
 import Login from "./authentication/Login"
 import Error from "./authentication/Error"
+import Services from "./component/Services"
+import { useEffect } from "react"
 
 
 export default function App(){
@@ -13,11 +15,13 @@ export default function App(){
 
     <Routes>
       <Route path="/" element = {<AppLayout/>} >
+      
       {/* <Route path="/dashboard" element={<Dashboard />} > */}
       <Route path="content" element={<Content />} />
       </Route>
       <Route path="/login" element={<Login/>}/>
       <Route path="/error" element={<Error/>}/>
+      <Route path="/services" element={<Services/>}/>
       {/* </Route> */}
     </Routes>
     </BrowserRouter>
@@ -25,9 +29,11 @@ export default function App(){
 }
 
 const AppLayout = () => {
+ 
   return (
     <>
       <Dashboard />
+     
     </>
   );
 }

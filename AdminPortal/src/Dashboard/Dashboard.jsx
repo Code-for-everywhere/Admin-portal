@@ -1,7 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faSun } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faSun} from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
+import ProfileMenu from "./ProfileMenu";
 import { Outlet } from "react-router-dom"; // Import Outlet
 
 export default function Dashboard() {
