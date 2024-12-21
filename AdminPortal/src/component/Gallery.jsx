@@ -1,7 +1,10 @@
-import  { useState } from "react";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addGalleryItem, updateGalleryItem, deleteGalleryItem } from "../Store/gallerySlice";
 
 const Gallery = () => {
-  const [galleryItems, setGalleryItems] = useState([]);
+  const dispatch = useDispatch();
+  const galleryItems = useSelector((state) => state.gallery.galleryItems);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [formData, setFormData] = useState({
     FestivalsUrl: "",
@@ -27,11 +30,11 @@ const Gallery = () => {
     }
 
     if (editingIndex !== null) {
-      const updatedItems = [...galleryItems];
-      updatedItems[editingIndex] = formData;
-      setGalleryItems(updatedItems);
+      // Update existing gallery item
+      dispatch(updateGalleryItem({ index: editingIndex, updatedItem: formData }));
     } else {
-      setGalleryItems([...galleryItems, formData]);
+      // Add new gallery item
+      dispatch(addGalleryItem(formData));
     }
 
     setFormData({ FestivalsUrl: "", HackathonUrl: "", TeamEventsUrl: "" });
@@ -46,7 +49,7 @@ const Gallery = () => {
   };
 
   const handleDelete = (index) => {
-    setGalleryItems(galleryItems.filter((_, i) => i !== index));
+    dispatch(deleteGalleryItem(index));
   };
 
   return (

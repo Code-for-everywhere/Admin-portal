@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
-import {  faXmark,faRightToBracket,faTriangleExclamation,faBars } from "@fortawesome/free-solid-svg-icons";
+import {  faXmark,faRss,faBars  ,faHeadset, faTrophy, faCalendarWeek, faFileImage, faBriefcase, faPeopleGroup, faCubesStacked, faUserGraduate,} from "@fortawesome/free-solid-svg-icons";
 
 // eslint-disable-next-line react/prop-types
 const Sidebar = ({ isOpen, minWidth, handleToggle }) => {
@@ -26,47 +26,47 @@ const Sidebar = ({ isOpen, minWidth, handleToggle }) => {
         </li>
         <li className="hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
           <NavLink to="/career">
-          <FontAwesomeIcon icon={faRightToBracket} className="text-black" />&nbsp;Career
+          <FontAwesomeIcon icon={faUserGraduate} className="text-black" />&nbsp;Career
           </NavLink>
         </li>
         <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
           <NavLink to="/blog">
-          <FontAwesomeIcon icon={faTriangleExclamation} className="text-black" /> &nbsp; Blog
+          <FontAwesomeIcon icon={faRss} className="text-black" /> &nbsp; Blog
           </NavLink>
         </li>
         <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
           <NavLink to="/getInTouch">
-          <FontAwesomeIcon icon={faTriangleExclamation} className="text-black" />&nbsp;  Get in Touch
+          <FontAwesomeIcon icon={faHeadset} className="text-black" />&nbsp;  Get in Touch
           </NavLink>
         </li>
         <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
           <NavLink to="/award">
-          <FontAwesomeIcon icon={faTriangleExclamation} className="text-black" />&nbsp;  Award
+          <FontAwesomeIcon icon={faTrophy} className="text-black" />&nbsp;  Award
           </NavLink>
         </li>
         <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
           <NavLink to="/events">
-          <FontAwesomeIcon icon={faTriangleExclamation} className="text-black" />&nbsp;  Events
+          <FontAwesomeIcon icon={faCalendarWeek} className="text-black" />&nbsp;  Events
           </NavLink>
         </li>
         <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
           <NavLink to="/gallery">
-          <FontAwesomeIcon icon={faTriangleExclamation} className="text-black" />&nbsp;  Gallery
+          <FontAwesomeIcon icon={faFileImage} className="text-black" />&nbsp;  Gallery
           </NavLink>
         </li>
         <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
           <NavLink to="/service">
-          <FontAwesomeIcon icon={faTriangleExclamation} className="text-black" />&nbsp;  Service
+          <FontAwesomeIcon icon={faBriefcase} className="text-black" />&nbsp;  Service
           </NavLink>
         </li>
         <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
           <NavLink to="/team">
-          <FontAwesomeIcon icon={faTriangleExclamation} className="text-black" />&nbsp;  Team
+          <FontAwesomeIcon icon={faPeopleGroup} className="text-black" />&nbsp;  Team
           </NavLink>
         </li>
         <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
           <NavLink to="/testimonial">
-          <FontAwesomeIcon icon={faTriangleExclamation} className="text-black" />&nbsp;  Testimonoial
+          <FontAwesomeIcon icon={faCubesStacked} className="text-black" />&nbsp;  Testimonoial
           </NavLink>
         </li>
       </ul>
@@ -102,47 +102,47 @@ const Sidebar = ({ isOpen, minWidth, handleToggle }) => {
         </li>
         <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold ">
           <NavLink to="/Career">
-          <FontAwesomeIcon icon={faRightToBracket} className="text-black" /> &nbsp;  Career
+          <FontAwesomeIcon icon={faUserGraduate} className="text-black" /> &nbsp;  Career
           </NavLink>
         </li>
         <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
           <NavLink to="/blog">
-          <FontAwesomeIcon icon={faTriangleExclamation} className="text-black" /> &nbsp; Blog
+          <FontAwesomeIcon icon={faRss} className="text-black" /> &nbsp; Blog
           </NavLink>
         </li>
         <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
           <NavLink to="/getInTouch">
-          <FontAwesomeIcon icon={faTriangleExclamation} className="text-black" />&nbsp;  Get in Touch
+          <FontAwesomeIcon icon={faHeadset} className="text-black" />&nbsp;  Get in Touch
           </NavLink>
         </li>
         <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
           <NavLink to="/Award">
-          <FontAwesomeIcon icon={faTriangleExclamation} className="text-black" />&nbsp;  Award
+          <FontAwesomeIcon icon={faTrophy} className="text-black" />&nbsp;  Award
           </NavLink>
         </li>
         <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
           <NavLink to="/events">
-          <FontAwesomeIcon icon={faTriangleExclamation} className="text-black" />&nbsp;  Events
+          <FontAwesomeIcon icon={faCalendarWeek} className="text-black" />&nbsp;  Events
           </NavLink>
         </li>
         <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
           <NavLink to="/gallery">
-          <FontAwesomeIcon icon={faTriangleExclamation} className="text-black" />&nbsp;  Gallery
+          <FontAwesomeIcon icon={faFileImage} className="text-black" />&nbsp;  Gallery
           </NavLink>
         </li>
         <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
           <NavLink to="/service">
-          <FontAwesomeIcon icon={faTriangleExclamation} className="text-black" />&nbsp;  Service
+          <FontAwesomeIcon icon={faBriefcase} className="text-black" />&nbsp;  Service
           </NavLink>
         </li>
         <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
           <NavLink to="/team">
-          <FontAwesomeIcon icon={faTriangleExclamation} className="text-black" />&nbsp;  Team
+          <FontAwesomeIcon icon={faPeopleGroup} className="text-black" />&nbsp;  Team
           </NavLink>
         </li>
         <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
           <NavLink to="/testimonial">
-          <FontAwesomeIcon icon={faTriangleExclamation} className="text-black" />&nbsp;  Testimonoial
+          <FontAwesomeIcon icon={faCubesStacked} className="text-black" />&nbsp;  Testimonoial
           </NavLink>
         </li>
       </ul>

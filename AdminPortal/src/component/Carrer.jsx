@@ -1,6 +1,9 @@
-import  { useState } from "react";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addCareerSubmission } from '../Store/careerSlice';
 
 const Career = () => {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,8 +31,12 @@ const Career = () => {
       return;
     }
 
+    // Dispatch career submission to Redux store
+    dispatch(addCareerSubmission(formData));
+
     console.log("Form Submitted", formData);
 
+    // Reset form data after submission
     setFormData({
       name: "",
       email: "",

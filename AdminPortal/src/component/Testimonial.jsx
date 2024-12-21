@@ -1,7 +1,15 @@
-import  { useState } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  addTestimonial,
+  updateTestimonial,
+  deleteTestimonial,
+} from "../Store/testimonialSlice";
 
 const Testimonial = () => {
-  const [testimonials, setTestimonials] = useState([]);
+  const dispatch = useDispatch();
+  const testimonials = useSelector((state) => state.testimonials.testimonials);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [formData, setFormData] = useState({ name: "", videosrc: "" });
   const [editingIndex, setEditingIndex] = useState(null);
@@ -23,11 +31,11 @@ const Testimonial = () => {
     }
 
     if (editingIndex !== null) {
-      const updatedTestimonials = [...testimonials];
-      updatedTestimonials[editingIndex] = formData;
-      setTestimonials(updatedTestimonials);
+      dispatch(
+        updateTestimonial({ index: editingIndex, updatedTestimonial: formData })
+      );
     } else {
-      setTestimonials([...testimonials, formData]);
+      dispatch(addTestimonial(formData));
     }
 
     setFormData({ name: "", videosrc: "" });
@@ -42,7 +50,7 @@ const Testimonial = () => {
   };
 
   const handleDelete = (index) => {
-    setTestimonials(testimonials.filter((_, i) => i !== index));
+    dispatch(deleteTestimonial(index));
   };
 
   return (
@@ -58,9 +66,14 @@ const Testimonial = () => {
       </button>
 
       {isFormVisible && (
-        <form className="mt-4 space-y-4 w-full bg-white p-6 rounded-lg shadow-md" onSubmit={handleFormSubmit}>
+        <form
+          className="mt-4 space-y-4 w-full bg-white p-6 rounded-lg shadow-md"
+          onSubmit={handleFormSubmit}
+        >
           <div>
-            <label className="block text-sm font-medium text-gray-700">Name</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Name
+            </label>
             <input
               type="text"
               name="name"
@@ -72,7 +85,9 @@ const Testimonial = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Video URL</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Video URL
+            </label>
             <input
               type="url"
               name="videosrc"
@@ -96,15 +111,23 @@ const Testimonial = () => {
         <table className="mt-6 w-full border-collapse border border-gray-300">
           <thead>
             <tr>
-              <th className="border border-gray-300 px-4 py-2 text-left">Name</th>
-              <th className="border border-gray-300 px-4 py-2 text-left">Video</th>
-              <th className="border border-gray-300 px-4 py-2 text-center">Actions</th>
+              <th className="border border-gray-300 px-4 py-2 text-left">
+                Name
+              </th>
+              <th className="border border-gray-300 px-4 py-2 text-left">
+                Video
+              </th>
+              <th className="border border-gray-300 px-4 py-2 text-center">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
             {testimonials.map((testimonial, index) => (
               <tr key={index} className="border-t">
-                <td className="border border-gray-300 px-4 py-2">{testimonial.name}</td>
+                <td className="border border-gray-300 px-4 py-2">
+                  {testimonial.name}
+                </td>
                 <td className="border border-gray-300 px-4 py-2">
                   <video className="w-full max-w-xs" controls>
                     <source src={testimonial.videosrc} type="video/mp4" />

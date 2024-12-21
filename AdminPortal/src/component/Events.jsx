@@ -1,7 +1,10 @@
-import  { useState } from "react";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addEvent, updateEvent, deleteEvent } from "../Store/eventSlice";
 
 const Events = () => {
-  const [events, setEvents] = useState([]);
+  const dispatch = useDispatch();
+  const events = useSelector((state) => state.events.events);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [formData, setFormData] = useState({ eventImgUrl: "", eventName: "" });
   const [editingIndex, setEditingIndex] = useState(null);
@@ -23,11 +26,11 @@ const Events = () => {
     }
 
     if (editingIndex !== null) {
-      const updatedEvents = [...events];
-      updatedEvents[editingIndex] = formData;
-      setEvents(updatedEvents);
+      // Update existing event
+      dispatch(updateEvent({ index: editingIndex, updatedEvent: formData }));
     } else {
-      setEvents([...events, formData]);
+      // Add new event
+      dispatch(addEvent(formData));
     }
 
     setFormData({ eventImgUrl: "", eventName: "" });
@@ -42,7 +45,7 @@ const Events = () => {
   };
 
   const handleDelete = (index) => {
-    setEvents(events.filter((_, i) => i !== index));
+    dispatch(deleteEvent(index));
   };
 
   return (

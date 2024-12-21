@@ -1,17 +1,22 @@
-import  { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { 
+  setFormVisibility, 
+  setFormData, 
+  setEditingIndex, 
+  addMember, 
+  updateMember, 
+  deleteMember,
+   
+} from "../Store/teamSlice"; 
+
 
 const Team = () => {
-  const [members, setMembers] = useState([]);
-  const [isFormVisible, setIsFormVisible] = useState(false);
-  const [formData, setFormData] = useState({ name: "", position: "", imgUrl: "" });
-  const [editingIndex, setEditingIndex] = useState(null);
+  const dispatch = useDispatch();
+  const { members, isFormVisible, formData, editingIndex } = useSelector((state) => state.team);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    dispatch(setFormData({ ...formData, [name]: value }));
   };
 
   const handleFormSubmit = (e) => {
@@ -23,26 +28,20 @@ const Team = () => {
     }
 
     if (editingIndex !== null) {
-      const updatedMembers = [...members];
-      updatedMembers[editingIndex] = formData;
-      setMembers(updatedMembers);
+      dispatch(updateMember());
     } else {
-      setMembers([...members, formData]);
+      dispatch(addMember());
     }
-
-    setFormData({ name: "", position: "", imgUrl: "" });
-    setIsFormVisible(false);
-    setEditingIndex(null);
   };
 
   const handleEdit = (index) => {
-    setFormData(members[index]);
-    setEditingIndex(index);
-    setIsFormVisible(true);
+    dispatch(setFormData(members[index]));
+    dispatch(setEditingIndex(index));
+    dispatch(setFormVisibility(true));
   };
 
   const handleDelete = (index) => {
-    setMembers(members.filter((_, i) => i !== index));
+    dispatch(deleteMember(index));
   };
 
   return (
@@ -52,7 +51,7 @@ const Team = () => {
       </h1>
       <button
         className="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-600"
-        onClick={() => setIsFormVisible(true)}
+        onClick={() => dispatch(setFormVisibility(true))}
       >
         Add New Member
       </button>

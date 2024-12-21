@@ -1,9 +1,12 @@
-import  { useState } from "react";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addBlog, updateBlog, deleteBlog } from '../Store/blogSlice';
 
 const Blog = () => {
-  const [blogs, setBlogs] = useState([]);
+  const dispatch = useDispatch();
+  const blogs = useSelector((state) => state.blogs.blogs);
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const [formData, setFormData] = useState({ title: "", imgUrl: "", description: "" });
+  const [formData, setFormData] = useState({ title: '', imgUrl: '', description: '' });
   const [editingIndex, setEditingIndex] = useState(null);
 
   const handleInputChange = (e) => {
@@ -18,19 +21,17 @@ const Blog = () => {
     e.preventDefault();
 
     if (!formData.title || !formData.imgUrl || !formData.description) {
-      alert("All fields are required.");
+      alert('All fields are required.');
       return;
     }
 
     if (editingIndex !== null) {
-      const updatedBlogs = [...blogs];
-      updatedBlogs[editingIndex] = formData;
-      setBlogs(updatedBlogs);
+      dispatch(updateBlog({ index: editingIndex, updatedBlog: formData }));
     } else {
-      setBlogs([...blogs, formData]);
+      dispatch(addBlog(formData));
     }
 
-    setFormData({ title: "", imgUrl: "", description: "" });
+    setFormData({ title: '', imgUrl: '', description: '' });
     setIsFormVisible(false);
     setEditingIndex(null);
   };
@@ -42,7 +43,7 @@ const Blog = () => {
   };
 
   const handleDelete = (index) => {
-    setBlogs(blogs.filter((_, i) => i !== index));
+    dispatch(deleteBlog(index));
   };
 
   return (
@@ -98,7 +99,7 @@ const Blog = () => {
             type="submit"
             className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 w-full"
           >
-            {editingIndex !== null ? "Update Blog" : "Add Blog"}
+            {editingIndex !== null ? 'Update Blog' : 'Add Blog'}
           </button>
         </form>
       )}

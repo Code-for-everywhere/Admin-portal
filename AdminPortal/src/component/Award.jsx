@@ -1,9 +1,17 @@
-import  { useState } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { addAward, updateAward, deleteAward } from "../Store/awardSlice";
 
 const Award = () => {
-  const [awards, setAwards] = useState([]);
+  const dispatch = useDispatch();
+  const awards = useSelector((state) => state.awards.awards) || [];
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const [formData, setFormData] = useState({ title: "", imgUrl: "", description: "" });
+  const [formData, setFormData] = useState({
+    title: "",
+    imgUrl: "",
+    description: "",
+  });
   const [editingIndex, setEditingIndex] = useState(null);
 
   const handleInputChange = (e) => {
@@ -23,11 +31,9 @@ const Award = () => {
     }
 
     if (editingIndex !== null) {
-      const updatedAwards = [...awards];
-      updatedAwards[editingIndex] = formData;
-      setAwards(updatedAwards);
+      dispatch(updateAward({ index: editingIndex, updatedAward: formData }));
     } else {
-      setAwards([...awards, formData]);
+      dispatch(addAward(formData));
     }
 
     setFormData({ title: "", imgUrl: "", description: "" });
@@ -42,13 +48,13 @@ const Award = () => {
   };
 
   const handleDelete = (index) => {
-    setAwards(awards.filter((_, i) => i !== index));
+    dispatch(deleteAward(index));
   };
 
   return (
     <div className="p-4 max-w-full grow mx-auto">
       <h1 className="w-full h-16 rounded bg-gray-300 flex items-center justify-center text-xl sm:text-2xl lg:text-3xl">
-        Award
+        Awards
       </h1>
       <button
         className="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-600"
@@ -58,9 +64,14 @@ const Award = () => {
       </button>
 
       {isFormVisible && (
-        <form className="mt-4 space-y-4 w-full bg-white p-6 rounded-lg shadow-md" onSubmit={handleFormSubmit}>
+        <form
+          className="mt-4 space-y-4 w-full bg-white p-6 rounded-lg shadow-md"
+          onSubmit={handleFormSubmit}
+        >
           <div>
-            <label className="block text-sm font-medium text-gray-700">AwardName</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Award Name
+            </label>
             <input
               type="text"
               name="title"
@@ -72,7 +83,9 @@ const Award = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Image URL</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Image URL
+            </label>
             <input
               type="url"
               name="imgUrl"
@@ -84,7 +97,9 @@ const Award = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Description</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Description
+            </label>
             <textarea
               name="description"
               value={formData.description}
@@ -103,53 +118,54 @@ const Award = () => {
         </form>
       )}
 
-      {awards.length > 0 && (
-        <div className="overflow-x-auto my-7">
-        <table className="min-w-full table-auto bg-white shadow-lg rounded-lg">
-          <thead>
-            <tr className="border-b bg-gray-200 text-left">
-              <th className="px-4 py-2">Title</th>
-              <th className="px-4 py-2">Image</th>
-              <th className="px-4 py-2">Description</th>
-              <th className="px-4 py-2 ">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {awards.map((award, index) => (
-              <tr key={index} className="border-b">
-                <td className="px-4 py-2 flex items-center space-x-2">
-                  <img
-                    src={award.imgUrl}
-                    alt={award.title}
-                    className="w-10 h-10 rounded-full object-cover"
-                  />
-                </td>
-                <td className="px-4 py-2">{award.title}</td>
-                
-                <td className=" px-4 py-2">{award.description}</td>
-                <td className=" px-4 py-2 text-center">
-                  <div className="flex justify-center space-x-2">
-                    <button
-                      className="bg-green-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
-                      onClick={() => handleEdit(index)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-                      onClick={() => handleDelete(index)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        </div>
-      )}
-    
+      {awards && awards.length > 0 ? (
+  <div className="overflow-x-auto my-7">
+    <table className="min-w-full table-auto bg-white shadow-lg rounded-lg">
+      <thead>
+        <tr className="border-b bg-gray-200 text-left">
+          <th className="px-4 py-2">Title</th>
+          <th className="px-4 py-2">Image</th>
+          <th className="px-4 py-2">Description</th>
+          <th className="px-4 py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {awards.map((award, index) => (
+          <tr key={index} className="border-b">
+            <td className="px-4 py-2 flex items-center space-x-2">
+              <img
+                src={award.imgUrl}
+                alt={award.title}
+                className="w-10 h-10 rounded-full object-cover"
+              />
+            </td>
+            <td className="px-4 py-2">{award.title}</td>
+            <td className="px-4 py-2">{award.description}</td>
+            <td className="px-4 py-2 text-center">
+              <div className="flex justify-center space-x-2">
+                <button
+                  className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                  onClick={() => handleEdit(index)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                  onClick={() => handleDelete(index)}
+                >
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+) : (
+  <p>No awards available.</p>
+)}
+
     </div>
   );
 };
