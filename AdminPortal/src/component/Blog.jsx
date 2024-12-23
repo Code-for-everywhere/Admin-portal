@@ -47,12 +47,12 @@ const Blog = () => {
   };
 
   return (
-    <div className="p-4 max-w-5xl mx-auto">
+    <div className="p-4 max-w-full grow mx-auto">
       <h1 className="w-full h-16 rounded bg-gray-300 flex items-center justify-center text-xl sm:text-2xl lg:text-3xl">
         Blog
       </h1>
       <button
-        className="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-600"
+        className="bg-gray-500 text-white px-4 py-2 mt-4 rounded hover:bg-gray-600"
         onClick={() => setIsFormVisible(true)}
       >
         Add New Blog
@@ -105,31 +105,33 @@ const Blog = () => {
       )}
 
       {blogs.length > 0 && (
-        <table className="mt-6 w-full border-collapse border border-gray-300">
+        <div className='overflow-x-auto my-7'>
+        <table className="min-w-full table-auto bg-white shadow-lg rounded-lg">
           <thead>
-            <tr>
-              <th className="border border-gray-300 px-4 py-2 text-left">Title</th>
-              <th className="border border-gray-300 px-4 py-2 text-left">Image</th>
-              <th className="border border-gray-300 px-4 py-2 text-left">Description</th>
-              <th className="border border-gray-300 px-4 py-2 text-center">Actions</th>
+            <tr className='border-b bg-gray-200 text-left'>
+              <th className="px-4 py-2">Title</th>
+              <th className="px-4 py-2">Image</th>
+              <th className="px-4 py-2">Description</th>
+              <th className="px-4 py-2">Actions</th>
             </tr>
           </thead>
           <tbody>
             {blogs.map((blog, index) => (
-              <tr key={index} className="border-t">
-                <td className="border border-gray-300 px-4 py-2">{blog.title}</td>
-                <td className="border border-gray-300 px-4 py-2">
+              <tr key={index} className="border-b">
+                <td className="px-4 py-2 flex items-center space-x-2">
                   <img
                     src={blog.imgUrl}
                     alt={blog.title}
-                    className="w-16 h-16 object-cover rounded"
+                    className="w-10 h-10 rounded-full object-cover"
                   />
                 </td>
-                <td className="border border-gray-300 px-4 py-2">{blog.description}</td>
-                <td className="border border-gray-300 px-4 py-2 text-center">
+                <td className="px-4 py-2">{blog.title}</td>
+                
+                <td className="px-4 py-2">{blog.description}</td>
+                <td className="px-4 py-2">
                   <div className="flex justify-center space-x-2">
                     <button
-                      className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                      className="bg-green-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
                       onClick={() => handleEdit(index)}
                     >
                       Edit
@@ -146,7 +148,7 @@ const Blog = () => {
             ))}
           </tbody>
         </table>
-      )}
+      </div>)}
     </div>
   );
 };

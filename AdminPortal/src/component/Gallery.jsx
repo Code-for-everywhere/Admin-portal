@@ -53,12 +53,12 @@ const Gallery = () => {
   };
 
   return (
-    <div className="p-4 max-w-3xl mx-auto">
+    <div className="p-4 max-w-full grow mx-auto">
       <h1 className="w-full h-16 rounded bg-gray-300 flex items-center justify-center text-xl sm:text-2xl lg:text-3xl">
         Gallery
       </h1>
       <button
-        className="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-600"
+        className="bg-gray-500 text-white px-4 py-2 mt-4 rounded hover:bg-gray-600"
         onClick={() => setIsFormVisible(true)}
       >
         Add New Gallery Item
@@ -112,37 +112,38 @@ const Gallery = () => {
       )}
 
       {galleryItems.length > 0 && (
-        <table className="mt-6 w-full border-collapse border border-gray-300">
+        <div className="overflow-x-auto my-7">
+        <table className="min-w-full table-auto bg-white shadow-lg rounded-lg">
           <thead>
-            <tr>
-              <th className="border border-gray-300 px-4 py-2 text-left">Festivals</th>
-              <th className="border border-gray-300 px-4 py-2 text-left">Hackathons</th>
-              <th className="border border-gray-300 px-4 py-2 text-left">Team Events</th>
-              <th className="border border-gray-300 px-4 py-2 text-center">Actions</th>
+            <tr className="border-b bg-gray-200 text-left">
+              <th className="px-4 py-2">Festivals</th>
+              <th className="px-4 py-2">Hackathons</th>
+              <th className="px-4 py-2">Team Events</th>
+              <th className="px-4 py-2">Actions</th>
             </tr>
           </thead>
           <tbody>
             {galleryItems.map((item, index) => (
-              <tr key={index} className="border-t">
-                <td className="border border-gray-300 px-4 py-2">
+              <tr key={index} className="border-b">
+                <td className="px-4 py-2">
                   <a href={item.FestivalsUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
                     View Festivals
                   </a>
                 </td>
-                <td className="border border-gray-300 px-4 py-2">
+                <td className="px-4 py-2">
                   <a href={item.HackathonUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
                     View Hackathons
                   </a>
                 </td>
-                <td className="border border-gray-300 px-4 py-2">
+                <td className="px-4 py-2">
                   <a href={item.TeamEventsUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
                     View Team Events
                   </a>
                 </td>
-                <td className="border border-gray-300 px-4 py-2 text-center">
+                <td className="px-4 py-2">
                   <div className="flex justify-center space-x-2">
                     <button
-                      className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                      className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
                       onClick={() => handleEdit(index)}
                     >
                       Edit
@@ -159,7 +160,7 @@ const Gallery = () => {
             ))}
           </tbody>
         </table>
-      )}
+      </div>)}
     </div>
   );
 };

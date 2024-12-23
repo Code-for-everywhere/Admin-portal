@@ -54,12 +54,12 @@ const Testimonial = () => {
   };
 
   return (
-    <div className="p-4 max-w-3xl mx-auto">
+    <div className="p-4 max-w-full grow mx-auto">
       <h1 className="w-full h-16 rounded bg-gray-300 flex items-center justify-center text-xl sm:text-2xl lg:text-3xl">
         Testimonials
       </h1>
       <button
-        className="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-600"
+        className="bg-gray-500 text-white px-4 py-2 mt-4 rounded hover:bg-gray-600"
         onClick={() => setIsFormVisible(true)}
       >
         Add New Testimonial
@@ -108,36 +108,37 @@ const Testimonial = () => {
       )}
 
       {testimonials.length > 0 && (
-        <table className="mt-6 w-full border-collapse border border-gray-300">
+        <div className="overflow-x-auto my-7">
+        <table className="min-w-full table-auto bg-white shadow-lg rounded-lg">
           <thead>
-            <tr>
-              <th className="border border-gray-300 px-4 py-2 text-left">
+            <tr className="border-b bg-gray-200 text-left">
+              <th className="px-4 py-2">
                 Name
               </th>
-              <th className="border border-gray-300 px-4 py-2 text-left">
+              <th className="px-4 py-2">
                 Video
               </th>
-              <th className="border border-gray-300 px-4 py-2 text-center">
+              <th className="px-4 py-2">
                 Actions
               </th>
             </tr>
           </thead>
           <tbody>
             {testimonials.map((testimonial, index) => (
-              <tr key={index} className="border-t">
-                <td className="border border-gray-300 px-4 py-2">
+              <tr key={index} className="border-b">
+                <td className="px-4 py-2">
                   {testimonial.name}
                 </td>
-                <td className="border border-gray-300 px-4 py-2">
+                <td className="px-4 py-2">
                   <video className="w-full max-w-xs" controls>
                     <source src={testimonial.videosrc} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 </td>
-                <td className="border border-gray-300 px-4 py-2 text-center">
+                <td className=" px-4 py-2 text-center">
                   <div className="flex justify-center space-x-2">
                     <button
-                      className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                      className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
                       onClick={() => handleEdit(index)}
                     >
                       Edit
@@ -154,7 +155,7 @@ const Testimonial = () => {
             ))}
           </tbody>
         </table>
-      )}
+      </div>)}
     </div>
   );
 };

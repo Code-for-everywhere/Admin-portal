@@ -144,7 +144,7 @@ const Award = () => {
             <td className="px-4 py-2 text-center">
               <div className="flex justify-center space-x-2">
                 <button
-                  className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                  className="bg-green-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
                   onClick={() => handleEdit(index)}
                 >
                   Edit

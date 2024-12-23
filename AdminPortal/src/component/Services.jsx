@@ -1,16 +1,28 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { addItem, updateItem, deleteItem, setFormData, setEditingIndex, toggleFormVisibility, resetForm } from '../Store/serviceSlice';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addItem,
+  updateItem,
+  deleteItem,
+  setFormData,
+  setEditingIndex,
+  toggleFormVisibility,
+  resetForm,
+} from "../Store/serviceSlice";
 
 export default function Services() {
   const dispatch = useDispatch();
-  const { items, formData, isFormVisible, editingIndex } = useSelector((state) => state.services);
+  const { items, formData, isFormVisible, editingIndex } = useSelector(
+    (state) => state.services
+  );
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
-    dispatch(setFormData({
-      ...formData,
-      [name]: files ? files[0] : value,
-    }));
+    dispatch(
+      setFormData({
+        ...formData,
+        [name]: files ? files[0] : value,
+      })
+    );
   };
 
   const handleFormSubmit = (e) => {
@@ -49,13 +61,18 @@ export default function Services() {
         className="bg-gray-500 text-white px-4 py-2 mt-2 rounded hover:bg-gray-600"
         onClick={() => dispatch(toggleFormVisibility())}
       >
-        Add New
+        Add New Service
       </button>
 
       {isFormVisible && (
-        <form className="mt-4 space-y-4 w-full bg-white p-6 rounded-lg shadow-md" onSubmit={handleFormSubmit}>
+        <form
+          className="mt-4 space-y-4 w-full bg-white p-6 rounded-lg shadow-md"
+          onSubmit={handleFormSubmit}
+        >
           <div>
-            <label className="block text-sm font-medium text-gray-700">Title</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Title
+            </label>
             <input
               type="text"
               name="title"
@@ -67,7 +84,9 @@ export default function Services() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Description</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Description
+            </label>
             <textarea
               name="description"
               value={formData.description}
@@ -78,7 +97,9 @@ export default function Services() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Image</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Image
+            </label>
             <input
               type="file"
               name="image"
@@ -103,9 +124,10 @@ export default function Services() {
           <table className="min-w-full table-auto bg-white shadow-lg rounded-lg">
             <thead>
               <tr className="border-b bg-gray-200 text-left">
+                <th className="px-4 py-2">Image</th>
                 <th className="px-4 py-2">Title</th>
                 <th className="px-4 py-2">Description</th>
-                <th className="px-4 py-2">Image</th>
+
                 <th className="px-4 py-2">Actions</th>
               </tr>
             </thead>
