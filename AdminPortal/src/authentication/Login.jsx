@@ -115,7 +115,7 @@ function Login() {
                     <div className="relative">
                       <label htmlFor="email" className="block text-lg sm:text-xl md:text-2xl text-gray-700">Username:</label>
                       <div className="relative">
-                        <i className="fas fa-user text-saffron text-2xl absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+                      <FontAwesomeIcon icon={faUser} className="text-saffron text-2xl absolute left-3 top-1/2 transform -translate-y-1/2" />
                         <input
                           id="email"
                           value={email}
@@ -131,7 +131,7 @@ function Login() {
                     <div className="relative">
                       <label htmlFor="password" className="block text-lg sm:text-xl md:text-2xl text-gray-700">Password:</label>
                       <div className="relative">
-                        <i className="fas fa-lock text-saffron text-2xl absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+                        <FontAwesomeIcon icon={faLock} className="text-saffron text-2xl absolute left-3 top-1/2 transform -translate-y-1/2" />
                         <input
                           type={showPassword ? "text" : "password"}
                           id="password"
@@ -155,7 +155,7 @@ function Login() {
                       type="submit"
                       className="w-full py-3 text-white bg-saffron hover:bg-yellow hover:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-saffron"
                     >
-                      <i className="fas fa-sign-in-alt text-white text-3xl"></i>
+                      <FontAwesomeIcon icon={faSignInAlt} className="fas fa-sign-in-alt text-white text-3xl"/>
                     </button>
                   </form>
 

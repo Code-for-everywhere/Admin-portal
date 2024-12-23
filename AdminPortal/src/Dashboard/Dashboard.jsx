@@ -5,10 +5,12 @@ import Sidebar from "./Sidebar";
 import ProfileMenu from "./ProfileMenu";
 import { Outlet } from "react-router-dom"; // Import Outlet
 
+
 export default function Dashboard() {
   const [toggle, setToggle] = useState(false);
   const [minWidth, setMinWidth] = useState(window.innerWidth);
   const [menu, setMenu] = useState(false);
+
 
   const handleToggle = () => {
     setToggle(!toggle);
@@ -16,6 +18,8 @@ export default function Dashboard() {
 
   const handleResize = () => {
     setMinWidth(window.innerWidth);
+
+
   };
 
   const handleMenu = () => {
@@ -27,6 +31,17 @@ export default function Dashboard() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  if(minWidth <= 432 && toggle) {
+    return <div
+    className="min-h-screen min-w-screen "
+  >
+    <Sidebar
+      isOpen={toggle}
+      minWidth={minWidth}
+      handleToggle={handleToggle}
+    />
+  </div>
+  }
   return (
     <>
       <header className="top-0 w-full">
@@ -76,7 +91,7 @@ export default function Dashboard() {
             </div>
 
             {/* Outlet to render Content component */}
-            <div className="p-4 bg-gray-100 flex-1">
+            <div className="p-4 bg-gray-100 h-screen">
               <Outlet /> {/* Content component will be displayed here */}
             </div>
           </div>

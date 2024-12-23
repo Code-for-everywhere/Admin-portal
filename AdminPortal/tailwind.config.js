@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: { 
+      screens: {
+        'xs': '432px', // Custom breakpoint for extra small screens
+      },
       colors: {
       saffron: ' #EE922B',
       yellow: '#ef6b13',  // Saffron color code

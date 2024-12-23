@@ -8,13 +8,13 @@ export default function ProfileMenu({ minWidth }) {
       <ul className=" overflow-visible ">
         <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
           <a href="#profile">
-            <FontAwesomeIcon icon={faUser} className="mr-1" />
+            <FontAwesomeIcon icon={faUser} className="mr-1 text-green-600" />
             Profile
           </a>
         </li>
         <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
           <a href="#settings">
-            <FontAwesomeIcon icon={faGear} className="mr-1" />
+            <FontAwesomeIcon icon={faGear} className="mr-1 text-blue-700" />
             Settings
           </a>
         </li>
@@ -25,12 +25,12 @@ export default function ProfileMenu({ minWidth }) {
       <ul className=" overflow-visible">
         <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
           <a href="#profile">
-            <FontAwesomeIcon icon={faUser} className="mr-1" /> Profile
+            <FontAwesomeIcon icon={faUser} className="mr-1 text-green-600" /> Profile
           </a>
         </li>
         <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
           <a href="#settings">
-            <FontAwesomeIcon icon={faGear}  className="mr-1"/>
+            <FontAwesomeIcon icon={faGear}  className="mr-1 text-blue-600"/>
             Settings
           </a>
         </li>
