@@ -34,7 +34,7 @@ export default function Dashboard() {
           {/* Sidebar */}
           {toggle && (
             <div
-              className={`h-screen ${minWidth <= 432 ? "min-w-full" : "w-1/6"}`}
+              className="h-full  w-1/5"
             >
               <Sidebar
                 isOpen={toggle}
