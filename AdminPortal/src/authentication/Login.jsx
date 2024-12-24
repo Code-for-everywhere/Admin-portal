@@ -17,7 +17,6 @@ function Login() {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newErrors = {};
     let isvalid = true;
 
     // Validate email
@@ -72,8 +71,8 @@ function Login() {
   return (
     <div className="flex min-h-screen flex-col sm:flex-row">
       {/* Left Section (Text Typing Effect) */}
-      <div className="flex-1  relative  bg-blue-950">
-               <div className="absolute top-1/3 left-1/3 transform -translate-x-1/3 -translate-y-36">
+      <div className="flex-1 flex justify-center items-center p-6 relative  bg-blue-950">
+               <div className="relative max-w-full sm:max-w-xs md:max-w-md lg:max-w-xl 2xl:max-w-2xl top-1/5 left-1/5 transform -translate-x-1/5 -translate-y-1/5">
                  <div className="relative w-full h-full">
                    <img
                      src="media/worldimage.webp"
@@ -109,11 +108,11 @@ function Login() {
                      </div>
                  </div>
 
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold my-6 text-center">Welcome Back!</h2>
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold my-4 sm:my-6 md:my-8 lg:my-10 xl:my-12 text-center">Welcome Back!</h2>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
                     {/* Username Field */}
-                    <div className="relative">
+                    <div className="relative max-w-full sm:max-w-xs md:max-w-md lg:max-w-lg xl:max-w-xl ">
                       <label htmlFor="email" className="block text-lg sm:text-xl md:text-2xl text-gray-700">Username:</label>
                       <div className="relative">
                       <FontAwesomeIcon icon={faUser} className="text-saffron text-2xl absolute left-3 top-1/2 transform -translate-y-1/2" />
