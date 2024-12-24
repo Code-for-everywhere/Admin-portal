@@ -1,25 +1,26 @@
 import { useDispatch, useSelector } from "react-redux";
-
+import { useState } from "react";
 import { addAward, updateAward, deleteAward ,setFormData,setEditingIndex,toggleFormVisibility,resetForm} from "../Store/awardSlice";
-
 const Award = () => {
+
+  const [titleerror, setTitleerror] = useState("");
+  const [descriptionerror,setDescriptionerror] = useState("");
+  const [imageerror, setImageerror] = useState("");
+
   const dispatch = useDispatch();
   const {awards,formData,isFormVisible,editingIndex} = useSelector((state) => state.awards);
-
   const handleInputChange = (e) => {
+    let isvalid = true;
     const { name, value, files } = e.target;
-  
     if (name === "image" && files) {
       const file = files[0];
       const previewUrl = URL.createObjectURL(file);
-  
       dispatch(
         setFormData({
           ...formData,
           [name]: previewUrl, // Store the preview URL
         })
       );
-  
       // Optionally store the file separately in a local variable or upload it immediately
     } else {
       dispatch(
@@ -29,40 +30,48 @@ const Award = () => {
         })
       );
     }
+    if(!formData.title){
+      setTitleerror("please Enter Title first");
+      
+    }else{
+      setTitleerror("");
+    }
+    if(!formData.image){
+      setImageerror("Please Choose Image");
+      
+    }else{
+      setImageerror("");
+    }
+    if(!formData.description){
+      setDescriptionerror("Please Write description");
+      
+    }else{
+      setDescriptionerror("");
+    }
   };
-  
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
-  
     if (!formData.title || !formData.image || !formData.description) {
       alert("All fields are required.");
       return;
     }
-  
-    
     if (editingIndex !== null) {
       dispatch(updateAward({ index: editingIndex, updatedAward: formData }));
     } else {
       dispatch(addAward(formData));
     }
-  
     dispatch(resetForm());
     dispatch(toggleFormVisibility());
   };
-  
-
   const handleEdit = (index) => {
    dispatch( setFormData(awards[index]));
     dispatch(setEditingIndex(index));
     dispatch(toggleFormVisibility());
   };
-
   const handleDelete = (index) => {
     dispatch(deleteAward(index));
   };
-
-  return (
+   return (
     <div className="p-4 max-w-full grow mx-auto">
       <h1 className="w-full h-16 rounded bg-gray-300 flex items-center justify-center text-xl sm:text-2xl lg:text-3xl">
         Awards
@@ -73,7 +82,6 @@ const Award = () => {
       >
         Add New Award
       </button>
-
       {isFormVisible && (
         <form
           className="mt-4 space-y-4 w-full bg-white p-6 rounded-lg shadow-md"
@@ -89,12 +97,10 @@ const Award = () => {
               value={formData.title}
               onChange={handleInputChange}
               className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
+              
             />
+            {titleerror && <p className="text-red-600">{titleerror}</p>}
           </div>
-
-         
-
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Description
@@ -104,12 +110,13 @@ const Award = () => {
               value={formData.description}
               onChange={handleInputChange}
               className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
+              
             ></textarea>
+            {descriptionerror && <p className="text-red-600">{descriptionerror}</p>}
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Image 
+              Image
             </label>
             <input
               type="file"
@@ -117,10 +124,10 @@ const Award = () => {
               accept="image/*"
               onChange={handleInputChange}
               className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
+              
             />
+            {imageerror && <p className="text-red-600">{imageerror}</p>}
           </div>
-
           <button
             type="submit"
             className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 w-1/8"
@@ -129,9 +136,8 @@ const Award = () => {
           </button>
         </form>
       )}
-
       {awards && awards.length > 0 ? (
-  <div className="overflow-x-auto my-7">
+      <div className="overflow-x-auto my-7">
     <table className="min-w-full table-auto bg-white shadow-lg rounded-lg">
       <thead>
         <tr className="border-b bg-gray-200 text-left">
@@ -144,7 +150,6 @@ const Award = () => {
       <tbody>
         {awards.map((award, index) => (
           <tr key={index} className="border-b">
-            
             <td className="px-4 py-2 flex items-center space-x-2">
               <img
                 src={award.image}
@@ -175,12 +180,10 @@ const Award = () => {
       </tbody>
     </table>
   </div>
-) : (
+   ) : (
   <p>No awards available.</p>
-)}
-
+ )}
     </div>
   );
 };
-
 export default Award;

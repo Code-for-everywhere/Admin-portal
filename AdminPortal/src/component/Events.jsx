@@ -1,8 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
 import { addEvent, updateEvent, deleteEvent ,setFormData,setEditingIndex,toggleFormVisibility,resetForm} from "../Store/eventSlice";
 
 
 const Events = () => {
+
+  const [nameerror, setNameerror] = useState("");
+  const [imageerror, setImageerror] = useState("");
   const dispatch = useDispatch();
   const {events,formData , isFormVisible , editingIndex} = useSelector((state) => state.events);
   
@@ -28,6 +32,17 @@ const Events = () => {
           [name]:value,
         })
       )
+    }
+    if(!formData.eventName){
+      setNameerror("Please Enter Name");
+    }
+    else{
+      setNameerror("");
+    }
+    if(!formData.image){
+      setImageerror("Please Choose Image");
+    }else{
+      setImageerror("");
     }
   };
 
@@ -83,8 +98,9 @@ const Events = () => {
               value={formData.eventName}
               onChange={handleInputChange}
               className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
+              
             />
+            {nameerror && <p className="text-red-600">{nameerror}</p>}
           </div>
 
           <div>
@@ -95,8 +111,9 @@ const Events = () => {
               accept="image/*"
               onChange={handleInputChange}
               className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
+              
             />
+            {imageerror && <p className="text-red-600">{imageerror}</p>}
           </div>
 
          

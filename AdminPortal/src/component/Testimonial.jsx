@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-
+import { useState } from "react";
 import {
   addTestimonial,
   updateTestimonial,
@@ -11,6 +11,9 @@ import {
 } from "../Store/testimonialSlice";
 
 const Testimonial = () => {
+
+  const [nameerror, setNameerror] = useState("");
+  const [videoerror, setVideoerror] = useState("");
   const dispatch = useDispatch();
   const {testimonials, formData , isFormVisible , editingIndex} = useSelector((state) => state.testimonials);
 
@@ -37,6 +40,16 @@ const Testimonial = () => {
           [name]: value,
         })
       );
+    }
+    if(!formData.name){
+      setNameerror("Please Enter Your Name:");
+    }else{
+      setNameerror("");
+    }
+    if(!formData.video){
+      setVideoerror("Please Choose video:");
+    }else{
+      setVideoerror("");
     }
   };
 
@@ -97,8 +110,9 @@ const Testimonial = () => {
               value={formData.name}
               onChange={handleInputChange}
               className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
+              
             />
+            {nameerror && <p className="text-red-600">{nameerror}</p>}
           </div>
 
           <div>
@@ -111,8 +125,9 @@ const Testimonial = () => {
               
               onChange={handleInputChange}
               className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
+              
             />
+            {videoerror && <p className="text-red-600">{videoerror}</p>}
           </div>
 
           <button
