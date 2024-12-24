@@ -17,12 +17,27 @@ export default function Services() {
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
-    dispatch(
-      setFormData({
-        ...formData,
-        [name]: files ? files[0] : value,
-      })
-    );
+    if (name === "image" && files) {
+      const file = files[0];
+      const previewUrl = URL.createObjectURL(file);
+  
+      dispatch(
+        setFormData({
+          ...formData,
+          [name]: previewUrl, // Store the preview URL
+        })
+      );
+  
+      // Optionally store the file separately in a local variable or upload it immediately
+    } else {
+      dispatch(
+        setFormData({
+          ...formData,
+          [name]: value,
+        })
+      );
+    }
+  
   };
 
   const handleFormSubmit = (e) => {
@@ -112,7 +127,7 @@ export default function Services() {
 
           <button
             type="submit"
-            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 w-full"
+            className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 w-1/7"
           >
             {editingIndex !== null ? "Update Item" : "Add Item"}
           </button>
@@ -137,7 +152,7 @@ export default function Services() {
                   <td className="px-4 py-2 flex items-center space-x-2">
                     {item.image && (
                       <img
-                        src={URL.createObjectURL(item.image)}
+                        src={item.image}
                         alt={item.title}
                         className="w-10 h-10 rounded-full object-cover"
                       />
@@ -146,15 +161,15 @@ export default function Services() {
                   <td className="px-4 py-2">{item.title}</td>
                   <td className="px-4 py-2">{item.description}</td>
                   <td className="border border-gray-300 px-4 py-2 text-center">
-                    <div className="flex justify-center space-x-2">
+                    <div className="flex justify-start space-x-2">
                       <button
-                        className="bg-green-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                        className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
                         onClick={() => handleEdit(index)}
                       >
                         Edit
                       </button>
                       <button
-                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                        className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
                         onClick={() => handleDelete(index)}
                       >
                         Delete

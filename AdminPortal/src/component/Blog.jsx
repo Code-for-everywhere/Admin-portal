@@ -1,29 +1,45 @@
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addBlog, updateBlog, deleteBlog } from '../Store/blogSlice';
+import { addBlog, updateBlog, deleteBlog , setFormData,setEditingIndex , toggleFormVisibility,resetForm } from '../Store/blogSlice';
 
 const Blog = () => {
   const dispatch = useDispatch();
-  const blogs = useSelector((state) => state.blogs.blogs);
-  const [isFormVisible, setIsFormVisible] = useState(false);
-  const [formData, setFormData] = useState({ title: '', imgUrl: '', description: '' });
-  const [editingIndex, setEditingIndex] = useState(null);
+  const {blogs ,formData , isFormVisible,editingIndex} = useSelector((state) => state.blogs);
+ 
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value ,files } = e.target;
+
+    if(name === "image" && files) {
+      const file = files[0];
+      const previewUrl = URL.createObjectURL(file);
+    dispatch(
     setFormData({
       ...formData,
-      [name]: value,
-    });
+      [name]: previewUrl,
+    }));
+  }
+  else {
+    dispatch(
+      setFormData({
+        ...formData,
+        [name]: value,
+      })
+    );
+  }
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.title || !formData.imgUrl || !formData.description) {
+    if (!formData.title || !formData.image || !formData.description) {
       alert('All fields are required.');
       return;
     }
+    const file = document.querySelector("input[name='image']").files[0];
+    if (file) {
+//
+    }
+
 
     if (editingIndex !== null) {
       dispatch(updateBlog({ index: editingIndex, updatedBlog: formData }));
@@ -31,15 +47,15 @@ const Blog = () => {
       dispatch(addBlog(formData));
     }
 
-    setFormData({ title: '', imgUrl: '', description: '' });
-    setIsFormVisible(false);
-    setEditingIndex(null);
+dispatch(resetForm());
+dispatch(toggleFormVisibility());
   };
 
   const handleEdit = (index) => {
-    setFormData(blogs[index]);
-    setEditingIndex(index);
-    setIsFormVisible(true);
+    dispatch(setFormData(blogs[index]))
+   
+    dispatch(setEditingIndex(index))
+    dispatch(toggleFormVisibility());
   };
 
   const handleDelete = (index) => {
@@ -53,7 +69,7 @@ const Blog = () => {
       </h1>
       <button
         className="bg-gray-500 text-white px-4 py-2 mt-4 rounded hover:bg-gray-600"
-        onClick={() => setIsFormVisible(true)}
+        onClick={() => dispatch(toggleFormVisibility())}
       >
         Add New Blog
       </button>
@@ -72,17 +88,7 @@ const Blog = () => {
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Image URL</label>
-            <input
-              type="url"
-              name="imgUrl"
-              value={formData.imgUrl}
-              onChange={handleInputChange}
-              className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
-            />
-          </div>
+          
 
           <div>
             <label className="block text-sm font-medium text-gray-700">Description</label>
@@ -94,10 +100,22 @@ const Blog = () => {
               required
             ></textarea>
           </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Image URL</label>
+            <input
+              type="file"
+              name="image"
+              accept='image/*'
+              
+              onChange={handleInputChange}
+              className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              required
+            />
+          </div>
 
           <button
             type="submit"
-            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 w-full"
+            className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 w-1/8"
           >
             {editingIndex !== null ? 'Update Blog' : 'Add Blog'}
           </button>
@@ -109,8 +127,9 @@ const Blog = () => {
         <table className="min-w-full table-auto bg-white shadow-lg rounded-lg">
           <thead>
             <tr className='border-b bg-gray-200 text-left'>
-              <th className="px-4 py-2">Title</th>
+              
               <th className="px-4 py-2">Image</th>
+              <th className="px-4 py-2">Title</th>
               <th className="px-4 py-2">Description</th>
               <th className="px-4 py-2">Actions</th>
             </tr>
@@ -120,7 +139,7 @@ const Blog = () => {
               <tr key={index} className="border-b">
                 <td className="px-4 py-2 flex items-center space-x-2">
                   <img
-                    src={blog.imgUrl}
+                    src={blog.image}
                     alt={blog.title}
                     className="w-10 h-10 rounded-full object-cover"
                   />
@@ -129,15 +148,15 @@ const Blog = () => {
                 
                 <td className="px-4 py-2">{blog.description}</td>
                 <td className="px-4 py-2">
-                  <div className="flex justify-center space-x-2">
+                  <div className="flex justify-start space-x-2">
                     <button
-                      className="bg-green-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                      className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
                       onClick={() => handleEdit(index)}
                     >
                       Edit
                     </button>
                     <button
-                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                      className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
                       onClick={() => handleDelete(index)}
                     >
                       Delete

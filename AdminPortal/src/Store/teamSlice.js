@@ -3,17 +3,33 @@ import { createSlice } from "@reduxjs/toolkit";
 // Initial state for the team
 const initialState = {
   members: [],
-  isFormVisible: false,
-  formData: { name: "", position: "", imgUrl: "" },
+
+  formData: {
+    name: "",
+    position: "",
+    image: null,
+  },
   editingIndex: null,
+  isFormVisible: false,
 };
 
 const teamSlice = createSlice({
   name: "team",
   initialState,
   reducers: {
-    setFormVisibility: (state, action) => {
-      state.isFormVisible = action.payload;
+    setMembers: (state, action) => {
+      state.members = action.payload;
+    },
+
+    addMember: (state, action) => {
+      state.members.push(action.payload);
+    },
+    updateMember: (state, action) => {
+      const { index, updatedMember } = action.payload;
+      state.members[index] = updatedMember;
+    },
+    deleteMember: (state, action) => {
+      state.members = state.members.filter((_, i) => i !== action.payload);
     },
     setFormData: (state, action) => {
       state.formData = action.payload;
@@ -21,36 +37,25 @@ const teamSlice = createSlice({
     setEditingIndex: (state, action) => {
       state.editingIndex = action.payload;
     },
-    addMember: (state) => {
-      const { name, position, imgUrl } = state.formData;
-      if (name && position && imgUrl) {
-        state.members.push(state.formData);
-        state.formData = { name: "", position: "", imgUrl: "" }; // Reset formData
-        state.isFormVisible = false;
-        state.editingIndex = null;
-      }
+    toggleFormVisibility: (state) => {
+      state.isFormVisible = !state.isFormVisible;
     },
-    updateMember: (state) => {
-      if (state.editingIndex !== null) {
-        state.members[state.editingIndex] = state.formData;
-        state.formData = { name: "", position: "", imgUrl: "" };
-        state.isFormVisible = false;
-        state.editingIndex = null;
-      }
-    },
-    deleteMember: (state, action) => {
-      state.members = state.members.filter((_, i) => i !== action.payload);
+    resetForm: (state) => {
+      state.formData = { title: "", description: "", image: null };
+      state.editingIndex = null;
     },
   },
 });
 
 export const {
-  setFormVisibility,
-  setFormData,
-  setEditingIndex,
   addMember,
   updateMember,
   deleteMember,
+  setEditingIndex,
+  setMembers,
+  toggleFormVisibility,
+  resetForm,
+  setFormData,
 } = teamSlice.actions;
 
 export default teamSlice.reducer;

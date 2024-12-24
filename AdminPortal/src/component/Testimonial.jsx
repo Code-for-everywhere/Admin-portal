@@ -1,31 +1,49 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
   addTestimonial,
   updateTestimonial,
   deleteTestimonial,
+  setFormData,
+  setEditingIndex,
+  toggleFormVisibility,
+  resetForm,
 } from "../Store/testimonialSlice";
 
 const Testimonial = () => {
   const dispatch = useDispatch();
-  const testimonials = useSelector((state) => state.testimonials.testimonials);
-  const [isFormVisible, setIsFormVisible] = useState(false);
-  const [formData, setFormData] = useState({ name: "", videosrc: "" });
-  const [editingIndex, setEditingIndex] = useState(null);
+  const {testimonials, formData , isFormVisible , editingIndex} = useSelector((state) => state.testimonials);
+
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    const { name, value ,files } = e.target;
+
+    if (name === "video" && files) {
+      const file = files[0];
+      const previewUrl = URL.createObjectURL(file);
+  
+      dispatch(
+        setFormData({
+          ...formData,
+          [name]: previewUrl, // Store the preview URL
+        })
+      );
+  
+      // Optionally store the file separately in a local variable or upload it immediately
+    } else {
+      dispatch(
+        setFormData({
+          ...formData,
+          [name]: value,
+        })
+      );
+    }
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.videosrc) {
+    if (!formData.name || !formData.video) {
       alert("All fields are required.");
       return;
     }
@@ -38,15 +56,14 @@ const Testimonial = () => {
       dispatch(addTestimonial(formData));
     }
 
-    setFormData({ name: "", videosrc: "" });
-    setIsFormVisible(false);
-    setEditingIndex(null);
+    dispatch(resetForm());
+    dispatch(toggleFormVisibility());
   };
 
   const handleEdit = (index) => {
-    setFormData(testimonials[index]);
-    setEditingIndex(index);
-    setIsFormVisible(true);
+    dispatch( setFormData(testimonials[index]));
+    dispatch(setEditingIndex(index));
+    dispatch(toggleFormVisibility());
   };
 
   const handleDelete = (index) => {
@@ -60,7 +77,7 @@ const Testimonial = () => {
       </h1>
       <button
         className="bg-gray-500 text-white px-4 py-2 mt-4 rounded hover:bg-gray-600"
-        onClick={() => setIsFormVisible(true)}
+        onClick={() => dispatch(toggleFormVisibility())}
       >
         Add New Testimonial
       </button>
@@ -89,9 +106,9 @@ const Testimonial = () => {
               Video URL
             </label>
             <input
-              type="url"
-              name="videosrc"
-              value={formData.videosrc}
+              type="file"
+              name="video"
+              accept="video/*"
               onChange={handleInputChange}
               className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               required
@@ -100,7 +117,7 @@ const Testimonial = () => {
 
           <button
             type="submit"
-            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 w-full"
+            className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 w-1/7"
           >
             {editingIndex !== null ? "Update Testimonial" : "Add Testimonial"}
           </button>
@@ -131,20 +148,20 @@ const Testimonial = () => {
                 </td>
                 <td className="px-4 py-2">
                   <video className="w-full max-w-xs" controls>
-                    <source src={testimonial.videosrc} type="video/mp4" />
+                    <source src={testimonial.video} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 </td>
                 <td className=" px-4 py-2 text-center">
-                  <div className="flex justify-center space-x-2">
+                  <div className="flex justify-start space-x-2">
                     <button
-                      className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                      className="bg-gray-800 text-white px-3 py-1 rounded hover:bg-green-900"
                       onClick={() => handleEdit(index)}
                     >
                       Edit
                     </button>
                     <button
-                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                      className="bg-gray-800 text-white px-3 py-1 rounded hover:bg-gray-900"
                       onClick={() => handleDelete(index)}
                     >
                       Delete

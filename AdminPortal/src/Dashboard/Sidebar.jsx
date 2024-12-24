@@ -21,7 +21,6 @@ const Sidebar = ({ isOpen, minWidth, handleToggle }) => {
   };
 
   return minWidth >= 432 ? (
-    
     <div
       className={`fixed top-0 left-0  bg-saffron rounded-r h-full text-white shadow-lg transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"
@@ -33,34 +32,28 @@ const Sidebar = ({ isOpen, minWidth, handleToggle }) => {
           alt="Logo"
         />
       </div>
-      <ul className="h-screen">
-        <NavLink to="/content">
-          <li className="hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
-            <FontAwesomeIcon icon={faBars} className="text-black" />
-            &nbsp; Dashboard
-          </li>
-        </NavLink>
-        <NavLink to="/career">
-          <li className="hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
-            <FontAwesomeIcon icon={faUserGraduate} className="text-black" />
-            &nbsp;Career
-          </li>
-        </NavLink>
+      <ul className="h-screen pl-2">
         <NavLink to="/blog">
           <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faRss} className="text-black" /> &nbsp; Blog
           </li>
         </NavLink>
-        <NavLink to="/getInTouch">
+        <NavLink to="/team">
           <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
-            <FontAwesomeIcon icon={faHeadset} className="text-black" />
-            &nbsp; Get in Touch
+            <FontAwesomeIcon icon={faPeopleGroup} className="text-black" />
+            &nbsp; Team
           </li>
         </NavLink>
         <NavLink to="/award">
           <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faTrophy} className="text-black" />
             &nbsp; Award
+          </li>
+        </NavLink>
+        <NavLink to="/career">
+          <li className="hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
+            <FontAwesomeIcon icon={faUserGraduate} className="text-black" />
+            &nbsp;Career
           </li>
         </NavLink>
         <NavLink to="/events">
@@ -81,16 +74,23 @@ const Sidebar = ({ isOpen, minWidth, handleToggle }) => {
             &nbsp; Service
           </li>
         </NavLink>
-        <NavLink to="/team">
-          <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
-            <FontAwesomeIcon icon={faPeopleGroup} className="text-black" />
-            &nbsp; Team
+        <NavLink to="/content">
+          <li className="hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
+            <FontAwesomeIcon icon={faBars} className="text-black" />
+            &nbsp; Dashboard
           </li>
         </NavLink>
         <NavLink to="/testimonial">
           <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faCubesStacked} className="text-black" />
             &nbsp; Testimonoial
+          </li>
+        </NavLink>
+
+        <NavLink to="/getInTouch">
+          <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
+            <FontAwesomeIcon icon={faHeadset} className="text-black" />
+            &nbsp; Get in Touch
           </li>
         </NavLink>
       </ul>
@@ -180,7 +180,6 @@ const Sidebar = ({ isOpen, minWidth, handleToggle }) => {
             &nbsp; Testimonoial
           </li>
         </NavLink>
-        
       </ul>
     </div>
   );

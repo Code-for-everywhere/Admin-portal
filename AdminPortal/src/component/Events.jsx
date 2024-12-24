@@ -1,26 +1,40 @@
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addEvent, updateEvent, deleteEvent } from "../Store/eventSlice";
+import { addEvent, updateEvent, deleteEvent ,setFormData,setEditingIndex,toggleFormVisibility,resetForm} from "../Store/eventSlice";
+
 
 const Events = () => {
   const dispatch = useDispatch();
-  const events = useSelector((state) => state.events.events);
-  const [isFormVisible, setIsFormVisible] = useState(false);
-  const [formData, setFormData] = useState({ eventImgUrl: "", eventName: "" });
-  const [editingIndex, setEditingIndex] = useState(null);
+  const {events,formData , isFormVisible , editingIndex} = useSelector((state) => state.events);
+  
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    const { name,value, files } = e.target;
+    
+    if(name === "image" && files) {
+      const file = files[0];
+      const previewUrl = URL.createObjectURL(file);
+
+      dispatch(
+        setFormData({
+          ...formData,
+          [name] : previewUrl,
+        })
+      );
+    }
+    else {
+      dispatch (
+        setFormData({
+          ...formData,
+          [name]:value,
+        })
+      )
+    }
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.eventImgUrl || !formData.eventName) {
+    if (!formData.image || !formData.eventName) {
       alert("All fields are required.");
       return;
     }
@@ -33,15 +47,14 @@ const Events = () => {
       dispatch(addEvent(formData));
     }
 
-    setFormData({ eventImgUrl: "", eventName: "" });
-    setIsFormVisible(false);
-    setEditingIndex(null);
+    dispatch(resetForm());
+    dispatch(toggleFormVisibility());
   };
 
   const handleEdit = (index) => {
-    setFormData(events[index]);
-    setEditingIndex(index);
-    setIsFormVisible(true);
+    dispatch( setFormData(events[index]));
+    dispatch(setEditingIndex(index));
+    dispatch(toggleFormVisibility());
   };
 
   const handleDelete = (index) => {
@@ -55,25 +68,13 @@ const Events = () => {
       </h1>
       <button
         className="bg-gray-500 text-white px-4 py-2 mt-4 rounded hover:bg-gray-600"
-        onClick={() => setIsFormVisible(true)}
+        onClick={() => dispatch(toggleFormVisibility())}
       >
         Add New Event
       </button>
 
       {isFormVisible && (
         <form className="mt-4 space-y-4 w-full bg-white p-6 rounded-lg shadow-md" onSubmit={handleFormSubmit}>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Event Image URL</label>
-            <input
-              type="url"
-              name="eventImgUrl"
-              value={formData.eventImgUrl}
-              onChange={handleInputChange}
-              className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
-            />
-          </div>
-
           <div>
             <label className="block text-sm font-medium text-gray-700">Event Name</label>
             <input
@@ -86,9 +87,22 @@ const Events = () => {
             />
           </div>
 
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Event Image URL</label>
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              onChange={handleInputChange}
+              className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              required
+            />
+          </div>
+
+         
           <button
             type="submit"
-            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 w-full"
+            className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 w-1/7"
           >
             {editingIndex !== null ? "Update Event" : "Add Event"}
           </button>
@@ -110,22 +124,22 @@ const Events = () => {
               <tr key={index} className="border-b">
                 <td className="px-4 py-2 flex items-center space-x-2">
                   <img
-                    src={event.eventImgUrl}
+                    src={event.image}
                     alt={event.eventName}
                     className="w-10 h-10 rounded-full object-cover"
                   />
                 </td>
                 <td className="px-4 py-2">{event.eventName}</td>
                 <td className="px-4 py-2">
-                  <div className="flex justify-center space-x-2">
+                  <div className="flex justify-start space-x-2">
                     <button
-                      className="bg-green-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                      className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
                       onClick={() => handleEdit(index)}
                     >
                       Edit
                     </button>
                     <button
-                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                      className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
                       onClick={() => handleDelete(index)}
                     >
                       Delete
