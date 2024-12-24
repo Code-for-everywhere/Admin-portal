@@ -33,12 +33,12 @@ export default function App(){
       <Route path="/events" element={<Events/>} />
       <Route path = "/getInTouch" element = {<GetInTouch/>} />
       <Route path = "/service" element = {<Services/>} />
-      <Route path = "/login" element = {<Login/>}/>
-      </Route>
-      <Route path="/login" element={<Login/>}/>
+      
       <Route path="/error" element={<Error/>}/>
       <Route path="/services" element={<Services/>}/>
+      </Route>
       {/* </Route> */}
+      <Route path="/login" element={<Login/>}/>
     </Routes>
     </BrowserRouter>
   )

@@ -20,16 +20,23 @@ const Events = () => {
       [name]: value,
     });
   };
-
+   const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if(file){
+      const imageUrl = URL.createObjectURL(file);
+      setFormData({
+        ...formData, 
+        eventImgUrl: imageUrl,
+      })
+    }
+   }
   const handleFormSubmit = (e) => {
     e.preventDefault();
     let isValid = true;
 
       if(!formData.eventImgUrl){
         setimageerror("Please Enter You image URL");
-
         isValid = false;
-
       }
       if(!formData.eventName){
         setEventnameerror("Please Enter The event name:");
@@ -58,6 +65,7 @@ const Events = () => {
     
     if(isValid){
     setIsFormVisible(false);
+    setFormData({});
     }else{
       setIsFormVisible(true);
     }
@@ -89,12 +97,12 @@ const Events = () => {
       {isFormVisible && (
         <form className="mt-4 space-y-4 w-full bg-white p-6 rounded-lg shadow-md" onSubmit={handleFormSubmit}>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Event Image URL</label>
+            <label className="block text-sm font-medium text-gray-700">Event Image </label>
             <input
-              type="url"
+              type="file"
+              accept="image/*"
               name="eventImgUrl"
-              value={formData.eventImgUrl}
-              onChange={handleInputChange}
+              onChange={handleImageChange}
               className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               required
             />

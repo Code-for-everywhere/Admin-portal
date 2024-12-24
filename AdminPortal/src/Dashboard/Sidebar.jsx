@@ -51,6 +51,16 @@ const Sidebar = ({ isOpen, minWidth, handleToggle }) => {
             <FontAwesomeIcon icon={faRss} className="text-black" /> &nbsp; Blog
           </li>
         </NavLink>
+        <NavLink to="/login">
+          <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
+            <FontAwesomeIcon icon={faRss} className="text-black" /> &nbsp; Login
+          </li>
+        </NavLink>
+        <NavLink to="/error">
+          <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
+            <FontAwesomeIcon icon={faRss} className="text-black" /> &nbsp; Error
+          </li>
+        </NavLink>
         <NavLink to="/getInTouch">
           <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faHeadset} className="text-black" />
