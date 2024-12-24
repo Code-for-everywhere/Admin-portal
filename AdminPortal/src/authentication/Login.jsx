@@ -1,27 +1,14 @@
 import  { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock, faSignInAlt, faUser } from "@fortawesome/free-solid-svg-icons"; // Import Font Awesome styles for styling
+import { faEye, faLock, faSignInAlt, faUser } from "@fortawesome/free-solid-svg-icons"; // Import Font Awesome styles for styling
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [emailerrors, setEmailerrors] = useState("");
+  const [passworderror, setPassworderror] = useState("");
   const [showPassword, setShowPassword] = useState(false); // for password visibility 
-  const [text, setText] = useState('');
-  const fullText = "Where Desire meet.";  // Fixed typo in "Where"
-
-  useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      setText((prev) => prev + fullText[index]);
-      index += 1;
-      if (index === fullText.length-1) {
-        clearInterval(interval); // Stop once the full text is displayed
-      }
-    }, 50); // Adjust the typing speed by changing this value (50ms per character)
-    
-    return () => clearInterval(interval); // Clean up the interval on component unmount
-  }, []); // Empty dependency array ensures this runs only once after initial render
+  const [isVisible, setIsVisible] = useState(false);
 
   // Regular expressions for email and password validation
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -30,68 +17,99 @@ function Login() {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    // eslint-disable-next-line no-unused-vars
     const newErrors = {};
+    let isvalid = true;
 
     // Validate email
     if (!emailRegex.test(email)) {
-      newErrors.email = "Please enter a valid email address";
+      setEmailerrors("Please enter a valid email address");
+      isvalid = false;
     }
+    else{
+      setEmailerrors("");
+    }
+  
+
 
     // Validate password
     if (!passwordRegex.test(password)) {
-      newErrors.password = "Password must be between 6-20 characters and contain at least one letter and one number";
+      setPassworderror("Password must be between 6-20 characters and contain at least one letter and one number");
+      isvalid = false;
+    }
+    else{
+      setPassworderror("");
     }
 
     // If there are no errors, handle the login
-    if (Object.keys(newErrors).length === 0) {
+    if (isvalid) {
       alert("Form submitted successfully!");
       setEmail("");
       setPassword("");
-    } else {
-      setErrors(newErrors);
-    }
+    } 
   };
+ 
+
+  useEffect(() => {
+    // Create an IntersectionObserver to detect when the image enters the viewport
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true); // Set the image to visible and trigger transition
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the image is in the viewport
+    );
+
+    // Observe the image element
+    const imgElement = document.querySelector('.image-scale');
+    if (imgElement) observer.observe(imgElement);
+
+    return () => {
+      if (imgElement) observer.unobserve(imgElement); // Cleanup the observer when the component unmounts
+    };
+  }, []);
 
   return (
     <div className="flex min-h-screen flex-col sm:flex-row">
       {/* Left Section (Text Typing Effect) */}
-      <div className="flex-1 bg-saffron justify-center items-center flex relative  p-6" style={{ backgroundImage: "url('https://cdn.pixabay.com/photo/2024/01/24/11/22/ai-8529399_1280.jpg')" }}>
-        
-        
-        {/* Logo taskcraft */}
+      <div className="flex-1 relative  bg-blue-950">
+             <div className="absolute top-10 left-1/2 transform -translate-x-1/2">
+             <div className="">
+               <img
+                 src="media/worldimage.webp"
+                 className={`image-scale transition-all duration-1000 transform ${isVisible ? 'scale-100 opacity-100' : 'scale-50 opacity-0'}`}
+                 style={{ width: "100%", height: "auto" }}
+               />
+               </div>
+               <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full mx-4 my-4 md:mx-4 md:my-4 lg:mx-6 lg:my-6 xl:mx-8 xl:my-8 2xl:mx-10 2xl:my-10  ">
+                 <img
+                   src="media/roundon world.webp"
+                   className={`image-scale transition-all duration-1000 transform ${isVisible ? 'scale-100 opacity-100' : 'scale-50 opacity-0'}`}
+                   style={{ width: "100%", height: "auto" }}
+                 />
+               </div>
+             </div>
+           </div>
 
-        <div className="absolute bg-white left-1/2 transform -translate-x-1/2 top-5 sm:top-10 p-4">
-          <img src="backgroundimage/TaskCraft_logo.jpg" alt="Logo" className="w-80 h-auto" />
-        </div>
-
-        <div className="text-white text-center mt-20 space-y-4">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold">Welcome</h1>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold">To</h1>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold">TaskCraft</h1>
-          <div className="text-lg sm:text-xl md:text-2xl space-y-8">
-            {/* Render the text gradually */}
-            <p className="whitespace-pre-wrap">{text}</p>
-          </div>
-        </div>
-      </div>
 
       {/* Right Section (Login Form) */}
       <div className="flex-1 flex justify-center items-center p-6 relative">
         {/* Logo taskcraft */}
         
             <div className="absolute left-1/2 transform -translate-x-1/2 top-5 sm:top-10 p-4">
-              <img src="backgroundimage/TaskCraft_logo.jpg" alt="Logo" className="w-80 h-auto" />
+              <img src="media/TaskCraft_logo.jpg" alt="Logo" className="w-80 h-auto" />
             </div>
 
               {/* Login Form */}
-              <div className="w-full max-w-md mt-32 sm:mt-10 md:mt-20">  {/* Adjusts the distance from the top */}
+              <div className="w-full max-w-md ">  {/* Adjusts the distance from the top */}
                  <div className="flex justify-center items-center">
-                     <div className="w-10 h-10 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-40 lg:h-40 bg-white rounded-full flex justify-center items-center border-4 border-solid border-saffron">
-                        <FontAwesomeIcon icon={faUser} className=" text-saffron text-xl sm:text-2xl md:text-3xl lg:text-4xl"/> {/* Font Awesome user icon */}
+                     <div className="w-1 h-2 sm:w-12 sm:h-12 md:w-32 md:h-32 lg:w-40 lg:h-40  rounded-full flex justify-center items-center ">
+                        <img src="media/logotaskcraft.webp" alt="" className=" text-saffron text-xl sm:text-2xl md:text-3xl lg:text-4xl"/> {/* Font Awesome user icon */}
                      </div>
                  </div>
 
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold my-5 text-center">Welcome Back!</h2>
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold my-6 text-center">Welcome Back!</h2>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
                     {/* Username Field */}
@@ -105,10 +123,9 @@ function Login() {
                           placeholder="yourname@gmail.com"
                           onChange={(e) => setEmail(e.target.value)}
                           className="p-3 mt-2 border-2 border-gray-300 rounded-md w-full focus:outline-none focus:border-saffron pl-10 text-xl"
-                          required
                         />
                       </div>
-                      {errors.email && <p className="text-red-600 text-sm mt-2">{errors.email}</p>}
+                      {emailerrors && <p className="text-red-600 text-sm mt-2">{emailerrors}</p>}
                     </div>
               
                     {/* Password Field */}
@@ -123,15 +140,15 @@ function Login() {
                           placeholder="********"
                           onChange={(e) => setPassword(e.target.value)}
                           className="p-3 mt-2 border-2 border-gray-300 rounded-md w-full focus:outline-none focus:border-saffron pl-10 text-xl"
-                          required
+                        
                         />
                          {/* Eye Icon to toggle password visibility */}
-                        <i
-                          className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'} text-saffron absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer`}
-                          onClick={() => setShowPassword(!showPassword)}
-                        ></i>
+                         <FontAwesomeIcon icon={faEye}  className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'} text-saffron absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer`}
+                          onClick={() => setShowPassword(!showPassword)} />
+                         
+                        
                       </div>
-                      {errors.password && <p className="text-red-600 text-sm mt-2">{errors.password}</p>}
+                      {passworderror && <p className="text-red-600 text-sm mt-2">{passworderror}</p>}
                     </div>
 
                     {/* Submit Button */}

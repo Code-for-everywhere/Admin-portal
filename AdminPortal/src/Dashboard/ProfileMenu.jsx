@@ -1,4 +1,4 @@
-import { faUser, faGear } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faGear} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // eslint-disable-next-line react/prop-types
