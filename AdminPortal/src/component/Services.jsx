@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import {
   addItem,
   updateItem,
@@ -10,6 +11,11 @@ import {
 } from "../Store/serviceSlice";
 
 export default function Services() {
+
+    const [titleerror, setTitleerror] = useState("");
+    const [descriptionerror,setDescriptionerror] = useState("");
+    const [imageerror, setImageerror] = useState("");
+  
   const dispatch = useDispatch();
   const { items, formData, isFormVisible, editingIndex } = useSelector(
     (state) => state.services
@@ -37,7 +43,24 @@ export default function Services() {
         })
       );
     }
-  
+    if(!formData.title){
+      setTitleerror("please Enter Title first");
+      
+    }else{
+      setTitleerror("");
+    }
+    if(!formData.image){
+      setImageerror("Please Choose Image");
+      
+    }else{
+      setImageerror("");
+    }
+    if(!formData.description){
+      setDescriptionerror("Please Write description");
+      
+    }else{
+      setDescriptionerror("");
+    }
   };
 
   const handleFormSubmit = (e) => {
@@ -94,8 +117,9 @@ export default function Services() {
               value={formData.title}
               onChange={handleInputChange}
               className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
+            
             />
+            {titleerror && <p className="text-red-600">{titleerror}</p>}
           </div>
 
           <div>
@@ -107,8 +131,9 @@ export default function Services() {
               value={formData.description}
               onChange={handleInputChange}
               className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
+              
             ></textarea>
+            {descriptionerror && <p className="text-red-600">{descriptionerror}</p>}
           </div>
 
           <div>
@@ -123,6 +148,7 @@ export default function Services() {
               onChange={handleInputChange}
               className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
             />
+            {imageerror && <p className="text-red-600">{imageerror}</p>}
           </div>
 
           <button

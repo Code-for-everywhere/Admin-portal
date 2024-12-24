@@ -1,7 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import { addBlog, updateBlog, deleteBlog , setFormData,setEditingIndex , toggleFormVisibility,resetForm } from '../Store/blogSlice';
 
 const Blog = () => {
+
+  const [titleerror, setTitleerror] = useState("");
+  const [descriptionerror,setDescriptionerror] = useState("");
+  const [imageerror, setImageerror] = useState("");
   const dispatch = useDispatch();
   const {blogs ,formData , isFormVisible,editingIndex} = useSelector((state) => state.blogs);
  
@@ -25,6 +30,24 @@ const Blog = () => {
         [name]: value,
       })
     );
+  }
+  if(!formData.title){
+    setTitleerror("please Enter Title first");
+    
+  }else{
+    setTitleerror("");
+  }
+  if(!formData.image){
+    setImageerror("Please Choose Image");
+    
+  }else{
+    setImageerror("");
+  }
+  if(!formData.description){
+    setDescriptionerror("Please Write description");
+    
+  }else{
+    setDescriptionerror("");
   }
   };
 
@@ -84,8 +107,9 @@ dispatch(toggleFormVisibility());
               value={formData.title}
               onChange={handleInputChange}
               className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
+              
             />
+            {titleerror && <p className='text-red-600'>{titleerror}</p>}
           </div>
 
           
@@ -97,8 +121,9 @@ dispatch(toggleFormVisibility());
               value={formData.description}
               onChange={handleInputChange}
               className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
+              
             ></textarea>
+            {descriptionerror && <p className='text-red-600'>{descriptionerror}</p>}
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Image URL</label>
@@ -109,8 +134,9 @@ dispatch(toggleFormVisibility());
               
               onChange={handleInputChange}
               className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
+              
             />
+            {imageerror && <p className='text-red-600'>{imageerror}</p>}
           </div>
 
           <button

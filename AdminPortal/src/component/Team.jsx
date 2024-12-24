@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import {
   toggleFormVisibility,
   setFormData,
@@ -10,6 +11,10 @@ import {
 } from "../Store/teamSlice";
 
 const Team = () => {
+  
+  const [nameerror, setNameerror] = useState("");
+  const [positionerror, setPositionerror] = useState("");
+  const [imageerror, setImageerror] = useState("");
   const dispatch = useDispatch();
   const { members, isFormVisible, formData, editingIndex } = useSelector(
     (state) => state.team
@@ -36,6 +41,21 @@ const Team = () => {
           [name]: value,
         })
       );
+    }
+    if(!formData.name){
+      setNameerror("Please Enter Name:");
+    }else{
+      setNameerror("");
+    }
+    if(!formData.position){
+      setPositionerror("Please Enter Position here:");
+    }else{
+      setPositionerror("");
+    }
+    if(!formData.image){
+      setImageerror("Please Choose image:");
+    }else{
+      setImageerror("");
     }
   };
 
@@ -95,8 +115,9 @@ const Team = () => {
               value={formData.name}
               onChange={handleInputChange}
               className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
+              
             />
+            {nameerror && <p className="text-red-600">{nameerror}</p>}
           </div>
 
           <div>
@@ -109,8 +130,9 @@ const Team = () => {
               value={formData.position}
               onChange={handleInputChange}
               className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
+              
             />
+            {positionerror && <p className="text-red-600">{positionerror}</p>}
           </div>
 
           <div>
@@ -123,8 +145,9 @@ const Team = () => {
               accept="image/*"
               onChange={handleInputChange}
               className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
+              
             />
+            {imageerror && <p className="text-red-600">{positionerror}</p>}
           </div>
 
           <button
