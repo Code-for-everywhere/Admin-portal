@@ -32,62 +32,102 @@ const Sidebar = ({ isOpen, minWidth, handleToggle }) => {
           alt="Logo"
         />
       </div>
-      <ul className="h-screen pl-2">
-        <NavLink to="/blog">
-          <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
+      <ul className="h-screen px-2 mt-1">
+        <NavLink to="/blog"   className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
+          <li className=" p-3  cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faRss} className="text-black" /> &nbsp; Blog
           </li>
         </NavLink>
-        <NavLink to="/team">
+        <NavLink to="/team" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    } >
           <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faPeopleGroup} className="text-black" />
             &nbsp; Team
           </li>
         </NavLink>
-        <NavLink to="/award">
+        <NavLink to="/award" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
           <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faTrophy} className="text-black" />
             &nbsp; Award
           </li>
         </NavLink>
-        <NavLink to="/career">
+        <NavLink to="/career" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
           <li className="hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faUserGraduate} className="text-black" />
             &nbsp;Career
           </li>
         </NavLink>
-        <NavLink to="/events">
+        <NavLink to="/events" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
           <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faCalendarWeek} className="text-black" />
             &nbsp; Events
           </li>
         </NavLink>
-        <NavLink to="/gallery">
+        <NavLink to="/gallery" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
           <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faFileImage} className="text-black" />
             &nbsp; Gallery
           </li>
         </NavLink>
-        <NavLink to="/service">
+        <NavLink to="/service" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
           <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faBriefcase} className="text-black" />
             &nbsp; Service
           </li>
         </NavLink>
-        <NavLink to="/content">
+        <NavLink to="/content" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
           <li className="hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faBars} className="text-black" />
             &nbsp; Dashboard
           </li>
         </NavLink>
-        <NavLink to="/testimonial">
+        <NavLink to="/testimonial" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
           <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faCubesStacked} className="text-black" />
             &nbsp; Testimonoial
           </li>
         </NavLink>
 
-        <NavLink to="/getInTouch">
+        <NavLink to="/getInTouch" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
           <li className=" hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faHeadset} className="text-black" />
             &nbsp; Get in Touch
@@ -120,61 +160,101 @@ const Sidebar = ({ isOpen, minWidth, handleToggle }) => {
         </div>
       </div>
       <ul className="mt-1 h-screen">
-        <NavLink to="/blog">
+        <NavLink to="/blog" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
           <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faRss} className="text-black" /> &nbsp; Blog
           </li>
         </NavLink>
-        <NavLink to="/team">
+        <NavLink to="/team" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
           <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faPeopleGroup} className="text-black" />
             &nbsp; Team
           </li>
         </NavLink>
-        <NavLink to="/Award">
+        <NavLink to="/Award" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
           <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faTrophy} className="text-black" />
             &nbsp; Award
           </li>
         </NavLink>
-        <NavLink to="/gallery">
+        <NavLink to="/gallery" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
           <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faFileImage} className="text-black" />
             &nbsp; Gallery
           </li>
         </NavLink>
-        <NavLink to="/service">
+        <NavLink to="/service" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
           <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faBriefcase} className="text-black" />
             &nbsp; Service
           </li>
         </NavLink>
-        <NavLink to="/Career">
+        <NavLink to="/Career" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
           <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold ">
             <FontAwesomeIcon icon={faUserGraduate} className="text-black" />{" "}
             &nbsp; Career
           </li>
         </NavLink>
-        <NavLink to="/events">
+        <NavLink to="/events" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
           <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faCalendarWeek} className="text-black" />
             &nbsp; Events
           </li>
         </NavLink>
-        <NavLink to="/content">
+        <NavLink to="/content" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
           <li className="flex items-center justify-center cursor-pointer hover:rounded hover:bg-orange-200 hover:text-black text-xl shadow text-white p-3 font-bold">
             <FontAwesomeIcon icon={faBars} className="text-black" />{" "}
             &nbsp;Dashboard
           </li>
         </NavLink>
-        <NavLink to="/getInTouch">
+        <NavLink to="/getInTouch" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
           <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faHeadset} className="text-black" />
             &nbsp; Get in Touch
           </li>
         </NavLink>
 
-        <NavLink to="/testimonial">
+        <NavLink to="/testimonial" className={({ isActive }) =>
+      isActive
+        ? 'bg-white rounded text-black' // Active state styles
+        : '' // Default and hover state styles
+    }>
           <li className="flex items-center justify-center hover:bg-orange-200 hover:rounded p-3 hover:text-black cursor-pointer text-xl font-bold">
             <FontAwesomeIcon icon={faCubesStacked} className="text-black" />
             &nbsp; Testimonoial

@@ -1,4 +1,4 @@
-import { faUser, faGear} from "@fortawesome/free-solid-svg-icons";
+import { faUser, faGear, faPersonWalkingArrowRight} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // eslint-disable-next-line react/prop-types
@@ -18,6 +18,12 @@ export default function ProfileMenu({ minWidth }) {
             Settings
           </a>
         </li>
+        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+          <a href="#settings">
+            <FontAwesomeIcon icon={faPersonWalkingArrowRight} className="mr-1 text-red-700"/>
+            LogOut
+          </a>
+        </li>
       </ul>
     </div>
   ) : (
@@ -32,6 +38,12 @@ export default function ProfileMenu({ minWidth }) {
           <a href="#settings">
             <FontAwesomeIcon icon={faGear}  className="mr-1 text-blue-600"/>
             Settings
+          </a>
+        </li>
+        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+          <a href="#settings">
+            <FontAwesomeIcon icon={faPersonWalkingArrowRight} className="mr-1 text-red-700"/>
+            LogOut
           </a>
         </li>
       </ul>
