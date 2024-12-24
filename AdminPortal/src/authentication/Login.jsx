@@ -17,8 +17,6 @@ function Login() {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // eslint-disable-next-line no-unused-vars
-    const newErrors = {};
     let isvalid = true;
 
     // Validate email
@@ -73,24 +71,25 @@ function Login() {
   return (
     <div className="flex min-h-screen flex-col sm:flex-row">
       {/* Left Section (Text Typing Effect) */}
-      <div className="flex-1 relative  bg-blue-950">
-             <div className="absolute top-10 left-1/2 transform -translate-x-1/2">
-             <div className="">
-               <img
-                 src="media/worldimage.webp"
-                 className={`image-scale transition-all duration-1000 transform ${isVisible ? 'scale-100 opacity-100' : 'scale-50 opacity-0'}`}
-                 style={{ width: "100%", height: "auto" }}
-               />
+      <div className="flex-1 flex justify-center items-center p-6 relative  bg-blue-950">
+               <div className="relative max-w-full sm:max-w-xs md:max-w-md lg:max-w-xl 2xl:max-w-2xl top-1/5 left-1/5 transform -translate-x-1/5 -translate-y-1/5">
+                 <div className="relative w-full h-full">
+                   <img
+                     src="media/worldimage.webp"
+                     className={`image-scale transition-all duration-1000 transform ${isVisible ? 'scale-100 opacity-100' : 'scale-50 opacity-0'}`}
+                     style={{ width: "full", height: "auto" }}
+                   />
+                 </div>
+                 <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full mx-4 my-4 md:mx-4 md:my-4 lg:mx-6 lg:my-6 xl:mx-8 xl:my-8 2xl:mx-10 2xl:my-10">
+                   <img
+                     src="media/roundon world.webp"
+                     className={`image-scale transition-all duration-1000 transform ${isVisible ? 'scale-100 opacity-100' : 'scale-50 opacity-0'}`}
+                     style={{ width: "", height: "auto" }}
+                   />
+                 </div>
                </div>
-               <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full mx-4 my-4 md:mx-4 md:my-4 lg:mx-6 lg:my-6 xl:mx-8 xl:my-8 2xl:mx-10 2xl:my-10  ">
-                 <img
-                   src="media/roundon world.webp"
-                   className={`image-scale transition-all duration-1000 transform ${isVisible ? 'scale-100 opacity-100' : 'scale-50 opacity-0'}`}
-                   style={{ width: "100%", height: "auto" }}
-                 />
-               </div>
-             </div>
-           </div>
+        </div>
+
 
 
       {/* Right Section (Login Form) */}
@@ -98,22 +97,22 @@ function Login() {
         {/* Logo taskcraft */}
         
             <div className="absolute left-1/2 transform -translate-x-1/2 top-5 sm:top-10 p-4">
-              <img src="media/TaskCraft_logo.jpg" alt="Logo" className="w-80 h-auto" />
+              <img src="media/TaskCraft_logo.jpg" alt="Logo" className="w-auto h-auto" />
             </div>
 
               {/* Login Form */}
-              <div className="w-full max-w-md ">  {/* Adjusts the distance from the top */}
+              <div className="w-full max-w-sm ">  {/* Adjusts the distance from the top */}
                  <div className="flex justify-center items-center">
                      <div className="w-1 h-2 sm:w-12 sm:h-12 md:w-32 md:h-32 lg:w-40 lg:h-40  rounded-full flex justify-center items-center ">
                         <img src="media/logotaskcraft.webp" alt="" className=" text-saffron text-xl sm:text-2xl md:text-3xl lg:text-4xl"/> {/* Font Awesome user icon */}
                      </div>
                  </div>
 
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold my-6 text-center">Welcome Back!</h2>
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold my-4 sm:my-6 md:my-8 lg:my-10 xl:my-12 text-center">Welcome Back!</h2>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
                     {/* Username Field */}
-                    <div className="relative">
+                    <div className="relative max-w-full sm:max-w-xs md:max-w-md lg:max-w-lg xl:max-w-xl ">
                       <label htmlFor="email" className="block text-lg sm:text-xl md:text-2xl text-gray-700">Username:</label>
                       <div className="relative">
                       <FontAwesomeIcon icon={faUser} className="text-saffron text-2xl absolute left-3 top-1/2 transform -translate-y-1/2" />
