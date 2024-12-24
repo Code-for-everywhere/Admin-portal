@@ -10,7 +10,7 @@ const Award = () => {
   const dispatch = useDispatch();
   const {awards,formData,isFormVisible,editingIndex} = useSelector((state) => state.awards);
   const handleInputChange = (e) => {
-    let isvalid = true;
+    
     const { name, value, files } = e.target;
     if (name === "image" && files) {
       const file = files[0];
